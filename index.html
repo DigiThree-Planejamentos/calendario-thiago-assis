@@ -238,7 +238,7 @@
 <div class="toolbar">
   <span class="toolbar-label">Ações:</span>
   <button class="btn btn-cyan" onclick="window.print()">🖨 Imprimir</button>
-  <button class="btn btn-ghost" onclick="exportHTML()">💾 Salvar HTML</button>
+  <button class="btn btn-ghost" onclick="salvarAlteracoes()">💾 Salvar HTML</button>
   <button class="btn btn-ghost" id="editModeBtn" onclick="toggleEditMode()">✏️ Modo Edição</button>
   <button class="btn btn-ghost" onclick="openDatasModal()">🗓 Datas Comemorativas</button>
   <div class="month-nav" id="monthNav"><button class="month-btn active" id="mnav0">Jan</button><button class="month-btn" id="mnav1">Fev</button><button class="month-btn" id="mnav2">Mar</button><button class="month-btn" id="mnav3">Abr</button><button class="month-btn" id="mnav4">Mai</button><button class="month-btn" id="mnav5">Jun</button><button class="month-btn" id="mnav6">Jul</button><button class="month-btn" id="mnav7">Ago</button><button class="month-btn" id="mnav8">Set</button><button class="month-btn" id="mnav9">Out</button><button class="month-btn" id="mnav10">Nov</button><button class="month-btn" id="mnav11">Dez</button></div>
@@ -1346,14 +1346,7 @@ document.getElementById('datasMonthSel').addEventListener('change', renderDatasL
 document.getElementById('datasOverlay').addEventListener('click', e=>{if(e.target===e.currentTarget)closeDatasModal();});
 
 // ── Export ──
-function exportHTML(){
-  const client = (document.getElementById('hdrClient')?.innerText || '').trim();
-  const year = (document.getElementById('hdrYear')?.innerText || '').trim();
-  const sub = (document.getElementById('hdrSub')?.innerText || '').trim();
-
-  let src = document.documentElement.outerHTML;
-
-  src = src.replace(/(<span contenteditable="true" id="hdrClient"[^>]*>)([\s\S]*?)(<\/span>)/, `$1${client}$3`);
+$3`);
   src = src.replace(/(<em contenteditable="true" id="hdrYear"[^>]*>)([\s\S]*?)(<\/em>)/, `$1${year}$3`);
   src = src.replace(/(<span[^>]*id="hdrSub"[^>]*>)([\s\S]*?)(<\/span>)/, `$1${sub}$3`);
 
@@ -1414,7 +1407,7 @@ function resetGithubToken(){
   const t = prompt("Cole seu token do GitHub:");
   if(t){
     localStorage.setItem("github_token", t);
-    alert("Token salvo");
+    alert("Token salvo 🔐");
   }
 }
 
@@ -1433,35 +1426,31 @@ function collectData(){
 
 function applyData(d){
   if(!d) return;
-  document.getElementById("hdrClient").innerText = d.client;
-  document.getElementById("hdrYear").innerText = d.year;
-  document.getElementById("hdrSub").innerText = d.sub;
-  document.getElementById("monthsContainer").innerHTML = d.months;
+  if(d.client) document.getElementById("hdrClient").innerText = d.client;
+  if(d.year) document.getElementById("hdrYear").innerText = d.year;
+  if(d.sub) document.getElementById("hdrSub").innerText = d.sub;
+  if(d.months) document.getElementById("monthsContainer").innerHTML = d.months;
 }
 
 async function carregarDados(){
   try{
     const url = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/${BRANCH}/${DATA_PATH}?t=${Date.now()}`;
     const res = await fetch(url,{cache:"no-store"});
-
-    if(!res.ok) {
-      console.log("data.json ainda não existe");
-      return;
-    }
+    if(!res.ok) return;
 
     const data = await res.json();
 
     if(!data || !data.client){
-      console.log("data.json vazio ou inválido");
+      console.log("data vazio");
       return;
     }
 
     applyData(data);
-
   }catch(e){
-    console.log("erro ao carregar:", e);
+    console.log("erro load", e);
   }
 }
+
 async function salvarAlteracoes(){
   const token = getGithubToken();
   if(!token) return;
@@ -1495,7 +1484,7 @@ async function salvarAlteracoes(){
   if(putRes.ok){
     alert("Salvo no GitHub 🚀");
   }else{
-    alert("Erro ao salvar");
+    alert("Erro ao salvar ❌");
   }
 }
 
