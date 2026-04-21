@@ -1443,12 +1443,25 @@ async function carregarDados(){
   try{
     const url = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/${BRANCH}/${DATA_PATH}?t=${Date.now()}`;
     const res = await fetch(url,{cache:"no-store"});
-    if(!res.ok) return;
-    const data = await res.json();
-    applyData(data);
-  }catch(e){console.log(e);}
-}
 
+    if(!res.ok) {
+      console.log("data.json ainda não existe");
+      return;
+    }
+
+    const data = await res.json();
+
+    if(!data || !data.client){
+      console.log("data.json vazio ou inválido");
+      return;
+    }
+
+    applyData(data);
+
+  }catch(e){
+    console.log("erro ao carregar:", e);
+  }
+}
 async function salvarAlteracoes(){
   const token = getGithubToken();
   if(!token) return;
