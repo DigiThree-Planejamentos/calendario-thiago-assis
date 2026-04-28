@@ -215,13 +215,14 @@
 
   @media print{.toolbar,.add-post-btn,.card-actions,.add-thumb-btn{display:none!important;}body{background:#fff;}.post-card{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-brand">
-    <h1><span contenteditable="true" id="hdrClient" style="outline:none;">Academia ProAtivo</span> · <em contenteditable="true" id="hdrYear" style="outline:none;">2026</em></h1>
-    <span class="sub" contenteditable="true" id="hdrSub" style="outline:none;">CALENDÁRIO EDITORIAL 2026</span>
+    <h1><span contenteditable="true" id="hdrClient" style="outline:none;">Thiago Assis Alfaiataria</span> · <em contenteditable="true" id="hdrYear" style="outline:none;">2026</em></h1>
+    <span class="sub" contenteditable="true" id="hdrSub" style="outline:none;">CALENDÁRIO EDITORIAL 2026 · @THIAGO.ASSIS.ALFAIATARIA</span>
     <div class="edit-hint">✏ clique em qualquer texto para editar</div>
   </div>
   <div class="header-meta">
@@ -238,20 +239,19 @@
 <div class="toolbar">
   <span class="toolbar-label">Ações:</span>
   <button class="btn btn-cyan" onclick="window.print()">🖨 Imprimir</button>
-  <button class="btn btn-cyan" onclick="salvarAlteracoes()">💾 Salvar alterações</button>
-  <button class="btn btn-danger" onclick="resetGithubToken()">🔐 Token GitHub</button>
-  <button class="btn btn-ghost" onclick="exportHTML()">📥 Salvar HTML</button>
+  <button class="btn btn-ghost" onclick="exportHTML()">💾 Salvar HTML</button>
+  <button class="btn btn-ghost" onclick="saveSiteData()">💾 Salvar no site</button>
   <button class="btn btn-ghost" id="editModeBtn" onclick="toggleEditMode()">✏️ Modo Edição</button>
   <button class="btn btn-ghost" onclick="openDatasModal()">🗓 Datas Comemorativas</button>
   <div class="month-nav" id="monthNav"><button class="month-btn active" id="mnav0">Jan</button><button class="month-btn" id="mnav1">Fev</button><button class="month-btn" id="mnav2">Mar</button><button class="month-btn" id="mnav3">Abr</button><button class="month-btn" id="mnav4">Mai</button><button class="month-btn" id="mnav5">Jun</button><button class="month-btn" id="mnav6">Jul</button><button class="month-btn" id="mnav7">Ago</button><button class="month-btn" id="mnav8">Set</button><button class="month-btn" id="mnav9">Out</button><button class="month-btn" id="mnav10">Nov</button><button class="month-btn" id="mnav11">Dez</button></div>
 </div>
 
 <div class="stats-bar">
-  <div class="stat-pill"><div class="num" style="color:var(--navy)" id="statTotal">11</div><div class="lbl">Total Posts</div></div>
-  <div class="stat-pill"><div class="num" style="color:var(--arte)" id="statArte">7</div><div class="lbl">Artes</div></div>
+  <div class="stat-pill"><div class="num" style="color:var(--navy)" id="statTotal">10</div><div class="lbl">Total Posts</div></div>
+  <div class="stat-pill"><div class="num" style="color:var(--arte)" id="statArte">4</div><div class="lbl">Artes</div></div>
   <div class="stat-pill"><div class="num" style="color:var(--foto)" id="statFoto">0</div><div class="lbl">Fotos</div></div>
   <div class="stat-pill"><div class="num" style="color:var(--story)" id="statStory">0</div><div class="lbl">Stories</div></div>
-  <div class="stat-pill"><div class="num" style="color:var(--reels)" id="statReels">2</div><div class="lbl">Reels</div></div>
+  <div class="stat-pill"><div class="num" style="color:var(--reels)" id="statReels">4</div><div class="lbl">Reels</div></div>
   <div class="stat-pill"><div class="num" style="color:var(--carrossel)" id="statCarrossel">2</div><div class="lbl">Carrosseis</div></div>
   <div class="stat-pill"><div class="num" style="color:var(--pend-brd)" id="statPend">0</div><div class="lbl">Pendentes</div></div>
   <div class="stat-pill"><div class="num" style="color:#059669" id="statPostado">0</div><div class="lbl">Postados</div></div>
@@ -290,19 +290,7 @@
         <textarea class="plan-input" style="min-height:48px;resize:vertical" placeholder="Anotações livres, pendências, decisões, reuniões, contatos…" onchange="savePlanField(1,'observacoes',this.value)"></textarea>
       </div>
     </div>
-  </div><div class="cal-grid-outer"><div class="cal-dow"><div class="cal-dow-cell wknd">Dom</div><div class="cal-dow-cell">Seg</div><div class="cal-dow-cell">Ter</div><div class="cal-dow-cell">Qua</div><div class="cal-dow-cell">Qui</div><div class="cal-dow-cell">Sex</div><div class="cal-dow-cell wknd">Sáb</div></div><div class="cal-weeks"><div class="cal-week"><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day" data-day="1"><div class="day-num">1</div><div class="special-label">🎆 Ano Novo</div><button class="add-post-btn" onclick="openModal(0,1,true)">＋ post</button></div><div class="cal-day" data-day="2"><div class="day-num">2</div><button class="add-post-btn" onclick="openModal(0,2,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="3"><div class="day-num">3</div><button class="add-post-btn" onclick="openModal(0,3,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="4"><div class="day-num">4</div>
-            <div class="post-card arte" onclick="openModal(0,4)">
-              <div class="card-actions">
-                <button class="card-btn" onclick="event.stopPropagation();togglePostado(0,4)" title="Toggle postado">✅</button>
-                <button class="card-btn" onclick="event.stopPropagation();openModal(0,4)">✏️</button>
-                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(0,4)">🗑</button>
-              </div>
-              <div class="post-type-tag">🎨 Arte</div>
-              
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(0,4,this.innerText)">teste</div>
-              
-              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(0,4)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day" data-day="5"><div class="day-num">5</div><button class="add-post-btn" onclick="openModal(0,5,true)">＋ post</button></div><div class="cal-day" data-day="6"><div class="day-num">6</div><div class="special-label">🏖️ Feriado RJ</div><button class="add-post-btn" onclick="openModal(0,6,true)">＋ post</button></div><div class="cal-day" data-day="7"><div class="day-num">7</div><button class="add-post-btn" onclick="openModal(0,7,true)">＋ post</button></div><div class="cal-day" data-day="8"><div class="day-num">8</div><button class="add-post-btn" onclick="openModal(0,8,true)">＋ post</button></div><div class="cal-day" data-day="9"><div class="day-num">9</div><button class="add-post-btn" onclick="openModal(0,9,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="10"><div class="day-num">10</div><button class="add-post-btn" onclick="openModal(0,10,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="11"><div class="day-num">11</div><button class="add-post-btn" onclick="openModal(0,11,true)">＋ post</button></div><div class="cal-day" data-day="12"><div class="day-num">12</div><button class="add-post-btn" onclick="openModal(0,12,true)">＋ post</button></div><div class="cal-day" data-day="13"><div class="day-num">13</div><button class="add-post-btn" onclick="openModal(0,13,true)">＋ post</button></div><div class="cal-day" data-day="14"><div class="day-num">14</div><button class="add-post-btn" onclick="openModal(0,14,true)">＋ post</button></div><div class="cal-day" data-day="15"><div class="day-num">15</div><button class="add-post-btn" onclick="openModal(0,15,true)">＋ post</button></div><div class="cal-day" data-day="16"><div class="day-num">16</div><button class="add-post-btn" onclick="openModal(0,16,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="17"><div class="day-num">17</div><button class="add-post-btn" onclick="openModal(0,17,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="18"><div class="day-num">18</div><button class="add-post-btn" onclick="openModal(0,18,true)">＋ post</button></div><div class="cal-day" data-day="19"><div class="day-num">19</div><button class="add-post-btn" onclick="openModal(0,19,true)">＋ post</button></div><div class="cal-day" data-day="20"><div class="day-num">20</div><button class="add-post-btn" onclick="openModal(0,20,true)">＋ post</button></div><div class="cal-day" data-day="21"><div class="day-num">21</div><button class="add-post-btn" onclick="openModal(0,21,true)">＋ post</button></div><div class="cal-day" data-day="22"><div class="day-num">22</div><button class="add-post-btn" onclick="openModal(0,22,true)">＋ post</button></div><div class="cal-day" data-day="23"><div class="day-num">23</div><button class="add-post-btn" onclick="openModal(0,23,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="24"><div class="day-num">24</div><button class="add-post-btn" onclick="openModal(0,24,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="25"><div class="day-num">25</div><button class="add-post-btn" onclick="openModal(0,25,true)">＋ post</button></div><div class="cal-day" data-day="26"><div class="day-num">26</div><button class="add-post-btn" onclick="openModal(0,26,true)">＋ post</button></div><div class="cal-day" data-day="27"><div class="day-num">27</div><button class="add-post-btn" onclick="openModal(0,27,true)">＋ post</button></div><div class="cal-day" data-day="28"><div class="day-num">28</div><button class="add-post-btn" onclick="openModal(0,28,true)">＋ post</button></div><div class="cal-day" data-day="29"><div class="day-num">29</div><button class="add-post-btn" onclick="openModal(0,29,true)">＋ post</button></div><div class="cal-day" data-day="30"><div class="day-num">30</div><button class="add-post-btn" onclick="openModal(0,30,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="31"><div class="day-num">31</div><button class="add-post-btn" onclick="openModal(0,31,true)">＋ post</button></div></div></div></div></div><div class="month-block" id="month-1"><div class="month-header"><div class="month-title">Fevereiro <em>2026</em></div><div class="month-badge">Mês 2</div></div><div class="month-notes" contenteditable="true" data-month="2" placeholder="Descreva a campanha do mês, promoções, objetivos, datas importantes…"></div><div class="plan-panel">
+  </div><div class="cal-grid-outer"><div class="cal-dow"><div class="cal-dow-cell wknd">Dom</div><div class="cal-dow-cell">Seg</div><div class="cal-dow-cell">Ter</div><div class="cal-dow-cell">Qua</div><div class="cal-dow-cell">Qui</div><div class="cal-dow-cell">Sex</div><div class="cal-dow-cell wknd">Sáb</div></div><div class="cal-weeks"><div class="cal-week"><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day" data-day="1"><div class="day-num">1</div><div class="special-label">🎆 Ano Novo</div><button class="add-post-btn" onclick="openModal(0,1,true)">＋ post</button></div><div class="cal-day" data-day="2"><div class="day-num">2</div><button class="add-post-btn" onclick="openModal(0,2,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="3"><div class="day-num">3</div><button class="add-post-btn" onclick="openModal(0,3,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="4"><div class="day-num">4</div><button class="add-post-btn" onclick="openModal(0,4,true)">＋ post</button></div><div class="cal-day" data-day="5"><div class="day-num">5</div><button class="add-post-btn" onclick="openModal(0,5,true)">＋ post</button></div><div class="cal-day" data-day="6"><div class="day-num">6</div><div class="special-label">🏖️ Feriado RJ</div><button class="add-post-btn" onclick="openModal(0,6,true)">＋ post</button></div><div class="cal-day" data-day="7"><div class="day-num">7</div><button class="add-post-btn" onclick="openModal(0,7,true)">＋ post</button></div><div class="cal-day" data-day="8"><div class="day-num">8</div><button class="add-post-btn" onclick="openModal(0,8,true)">＋ post</button></div><div class="cal-day" data-day="9"><div class="day-num">9</div><button class="add-post-btn" onclick="openModal(0,9,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="10"><div class="day-num">10</div><button class="add-post-btn" onclick="openModal(0,10,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="11"><div class="day-num">11</div><button class="add-post-btn" onclick="openModal(0,11,true)">＋ post</button></div><div class="cal-day" data-day="12"><div class="day-num">12</div><button class="add-post-btn" onclick="openModal(0,12,true)">＋ post</button></div><div class="cal-day" data-day="13"><div class="day-num">13</div><button class="add-post-btn" onclick="openModal(0,13,true)">＋ post</button></div><div class="cal-day" data-day="14"><div class="day-num">14</div><button class="add-post-btn" onclick="openModal(0,14,true)">＋ post</button></div><div class="cal-day" data-day="15"><div class="day-num">15</div><button class="add-post-btn" onclick="openModal(0,15,true)">＋ post</button></div><div class="cal-day" data-day="16"><div class="day-num">16</div><button class="add-post-btn" onclick="openModal(0,16,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="17"><div class="day-num">17</div><button class="add-post-btn" onclick="openModal(0,17,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="18"><div class="day-num">18</div><button class="add-post-btn" onclick="openModal(0,18,true)">＋ post</button></div><div class="cal-day" data-day="19"><div class="day-num">19</div><button class="add-post-btn" onclick="openModal(0,19,true)">＋ post</button></div><div class="cal-day" data-day="20"><div class="day-num">20</div><button class="add-post-btn" onclick="openModal(0,20,true)">＋ post</button></div><div class="cal-day" data-day="21"><div class="day-num">21</div><button class="add-post-btn" onclick="openModal(0,21,true)">＋ post</button></div><div class="cal-day" data-day="22"><div class="day-num">22</div><button class="add-post-btn" onclick="openModal(0,22,true)">＋ post</button></div><div class="cal-day" data-day="23"><div class="day-num">23</div><button class="add-post-btn" onclick="openModal(0,23,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="24"><div class="day-num">24</div><button class="add-post-btn" onclick="openModal(0,24,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="25"><div class="day-num">25</div><button class="add-post-btn" onclick="openModal(0,25,true)">＋ post</button></div><div class="cal-day" data-day="26"><div class="day-num">26</div><button class="add-post-btn" onclick="openModal(0,26,true)">＋ post</button></div><div class="cal-day" data-day="27"><div class="day-num">27</div><button class="add-post-btn" onclick="openModal(0,27,true)">＋ post</button></div><div class="cal-day" data-day="28"><div class="day-num">28</div><button class="add-post-btn" onclick="openModal(0,28,true)">＋ post</button></div><div class="cal-day" data-day="29"><div class="day-num">29</div><button class="add-post-btn" onclick="openModal(0,29,true)">＋ post</button></div><div class="cal-day" data-day="30"><div class="day-num">30</div><button class="add-post-btn" onclick="openModal(0,30,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="31"><div class="day-num">31</div><button class="add-post-btn" onclick="openModal(0,31,true)">＋ post</button></div></div></div></div></div><div class="month-block" id="month-1"><div class="month-header"><div class="month-title">Fevereiro <em>2026</em></div><div class="month-badge">Mês 2</div></div><div class="month-notes" contenteditable="true" data-month="2" placeholder="Descreva a campanha do mês, promoções, objetivos, datas importantes…"></div><div class="plan-panel">
     <div class="plan-header-row">
       <span class="plan-icon">📋</span>
       <span>Planejamento do Mês</span>
@@ -368,7 +356,7 @@
         <textarea class="plan-input" style="min-height:48px;resize:vertical" placeholder="Anotações livres, pendências, decisões, reuniões, contatos…" onchange="savePlanField(3,'observacoes',this.value)"></textarea>
       </div>
     </div>
-  </div><div class="cal-grid-outer"><div class="cal-dow"><div class="cal-dow-cell wknd">Dom</div><div class="cal-dow-cell">Seg</div><div class="cal-dow-cell">Ter</div><div class="cal-dow-cell">Qua</div><div class="cal-dow-cell">Qui</div><div class="cal-dow-cell">Sex</div><div class="cal-dow-cell wknd">Sáb</div></div><div class="cal-weeks"><div class="cal-week"><div class="cal-day wknd-col" data-day="1"><div class="day-num">1</div><button class="add-post-btn" onclick="openModal(2,1,true)">＋ post</button></div><div class="cal-day" data-day="2"><div class="day-num">2</div><button class="add-post-btn" onclick="openModal(2,2,true)">＋ post</button></div><div class="cal-day" data-day="3"><div class="day-num">3</div><button class="add-post-btn" onclick="openModal(2,3,true)">＋ post</button></div><div class="cal-day" data-day="4"><div class="day-num">4</div><button class="add-post-btn" onclick="openModal(2,4,true)">＋ post</button></div><div class="cal-day" data-day="5"><div class="day-num">5</div><button class="add-post-btn" onclick="openModal(2,5,true)">＋ post</button></div><div class="cal-day" data-day="6"><div class="day-num">6</div><button class="add-post-btn" onclick="openModal(2,6,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="7"><div class="day-num">7</div><button class="add-post-btn" onclick="openModal(2,7,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="8"><div class="day-num">8</div><div class="special-label">👩 Dia da Mulher</div><button class="add-post-btn" onclick="openModal(2,8,true)">＋ post</button></div><div class="cal-day" data-day="9"><div class="day-num">9</div><button class="add-post-btn" onclick="openModal(2,9,true)">＋ post</button></div><div class="cal-day" data-day="10"><div class="day-num">10</div><button class="add-post-btn" onclick="openModal(2,10,true)">＋ post</button></div><div class="cal-day" data-day="11"><div class="day-num">11</div><button class="add-post-btn" onclick="openModal(2,11,true)">＋ post</button></div><div class="cal-day" data-day="12"><div class="day-num">12</div><button class="add-post-btn" onclick="openModal(2,12,true)">＋ post</button></div><div class="cal-day" data-day="13"><div class="day-num">13</div><button class="add-post-btn" onclick="openModal(2,13,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="14"><div class="day-num">14</div><button class="add-post-btn" onclick="openModal(2,14,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="15"><div class="day-num">15</div><button class="add-post-btn" onclick="openModal(2,15,true)">＋ post</button></div><div class="cal-day" data-day="16"><div class="day-num">16</div><button class="add-post-btn" onclick="openModal(2,16,true)">＋ post</button></div><div class="cal-day" data-day="17"><div class="day-num">17</div><button class="add-post-btn" onclick="openModal(2,17,true)">＋ post</button></div><div class="cal-day" data-day="18"><div class="day-num">18</div><button class="add-post-btn" onclick="openModal(2,18,true)">＋ post</button></div><div class="cal-day" data-day="19"><div class="day-num">19</div><button class="add-post-btn" onclick="openModal(2,19,true)">＋ post</button></div><div class="cal-day" data-day="20"><div class="day-num">20</div><div class="special-label">🌿 Início do Outono</div><button class="add-post-btn" onclick="openModal(2,20,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="21"><div class="day-num">21</div><button class="add-post-btn" onclick="openModal(2,21,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="22"><div class="day-num">22</div><button class="add-post-btn" onclick="openModal(2,22,true)">＋ post</button></div><div class="cal-day" data-day="23"><div class="day-num">23</div><button class="add-post-btn" onclick="openModal(2,23,true)">＋ post</button></div><div class="cal-day" data-day="24"><div class="day-num">24</div><button class="add-post-btn" onclick="openModal(2,24,true)">＋ post</button></div><div class="cal-day" data-day="25"><div class="day-num">25</div><button class="add-post-btn" onclick="openModal(2,25,true)">＋ post</button></div><div class="cal-day" data-day="26"><div class="day-num">26</div><button class="add-post-btn" onclick="openModal(2,26,true)">＋ post</button></div><div class="cal-day" data-day="27"><div class="day-num">27</div><button class="add-post-btn" onclick="openModal(2,27,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="28"><div class="day-num">28</div><button class="add-post-btn" onclick="openModal(2,28,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="29"><div class="day-num">29</div><button class="add-post-btn" onclick="openModal(2,29,true)">＋ post</button></div><div class="cal-day" data-day="30"><div class="day-num">30</div><button class="add-post-btn" onclick="openModal(2,30,true)">＋ post</button></div><div class="cal-day" data-day="31"><div class="day-num">31</div><button class="add-post-btn" onclick="openModal(2,31,true)">＋ post</button></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div></div></div></div></div><div class="month-block" id="month-3"><div class="month-header"><div class="month-title">Abril <em>2026</em></div><div class="month-badge">Mês 4</div></div><div class="month-notes" contenteditable="true" data-month="4" placeholder="Descreva a campanha do mês, promoções, objetivos, datas importantes…">Academia ProAtivo — 10 posts planejados</div><div class="plan-panel">
+  </div><div class="cal-grid-outer"><div class="cal-dow"><div class="cal-dow-cell wknd">Dom</div><div class="cal-dow-cell">Seg</div><div class="cal-dow-cell">Ter</div><div class="cal-dow-cell">Qua</div><div class="cal-dow-cell">Qui</div><div class="cal-dow-cell">Sex</div><div class="cal-dow-cell wknd">Sáb</div></div><div class="cal-weeks"><div class="cal-week"><div class="cal-day wknd-col" data-day="1"><div class="day-num">1</div><button class="add-post-btn" onclick="openModal(2,1,true)">＋ post</button></div><div class="cal-day" data-day="2"><div class="day-num">2</div><button class="add-post-btn" onclick="openModal(2,2,true)">＋ post</button></div><div class="cal-day" data-day="3"><div class="day-num">3</div><button class="add-post-btn" onclick="openModal(2,3,true)">＋ post</button></div><div class="cal-day" data-day="4"><div class="day-num">4</div><button class="add-post-btn" onclick="openModal(2,4,true)">＋ post</button></div><div class="cal-day" data-day="5"><div class="day-num">5</div><button class="add-post-btn" onclick="openModal(2,5,true)">＋ post</button></div><div class="cal-day" data-day="6"><div class="day-num">6</div><button class="add-post-btn" onclick="openModal(2,6,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="7"><div class="day-num">7</div><button class="add-post-btn" onclick="openModal(2,7,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="8"><div class="day-num">8</div><div class="special-label">👩 Dia da Mulher</div><button class="add-post-btn" onclick="openModal(2,8,true)">＋ post</button></div><div class="cal-day" data-day="9"><div class="day-num">9</div><button class="add-post-btn" onclick="openModal(2,9,true)">＋ post</button></div><div class="cal-day" data-day="10"><div class="day-num">10</div><button class="add-post-btn" onclick="openModal(2,10,true)">＋ post</button></div><div class="cal-day" data-day="11"><div class="day-num">11</div><button class="add-post-btn" onclick="openModal(2,11,true)">＋ post</button></div><div class="cal-day" data-day="12"><div class="day-num">12</div><button class="add-post-btn" onclick="openModal(2,12,true)">＋ post</button></div><div class="cal-day" data-day="13"><div class="day-num">13</div><button class="add-post-btn" onclick="openModal(2,13,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="14"><div class="day-num">14</div><button class="add-post-btn" onclick="openModal(2,14,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="15"><div class="day-num">15</div><button class="add-post-btn" onclick="openModal(2,15,true)">＋ post</button></div><div class="cal-day" data-day="16"><div class="day-num">16</div><button class="add-post-btn" onclick="openModal(2,16,true)">＋ post</button></div><div class="cal-day" data-day="17"><div class="day-num">17</div><button class="add-post-btn" onclick="openModal(2,17,true)">＋ post</button></div><div class="cal-day" data-day="18"><div class="day-num">18</div><button class="add-post-btn" onclick="openModal(2,18,true)">＋ post</button></div><div class="cal-day" data-day="19"><div class="day-num">19</div><button class="add-post-btn" onclick="openModal(2,19,true)">＋ post</button></div><div class="cal-day" data-day="20"><div class="day-num">20</div><div class="special-label">🌿 Início do Outono</div><button class="add-post-btn" onclick="openModal(2,20,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="21"><div class="day-num">21</div><button class="add-post-btn" onclick="openModal(2,21,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="22"><div class="day-num">22</div><button class="add-post-btn" onclick="openModal(2,22,true)">＋ post</button></div><div class="cal-day" data-day="23"><div class="day-num">23</div><button class="add-post-btn" onclick="openModal(2,23,true)">＋ post</button></div><div class="cal-day" data-day="24"><div class="day-num">24</div><button class="add-post-btn" onclick="openModal(2,24,true)">＋ post</button></div><div class="cal-day" data-day="25"><div class="day-num">25</div><button class="add-post-btn" onclick="openModal(2,25,true)">＋ post</button></div><div class="cal-day" data-day="26"><div class="day-num">26</div><button class="add-post-btn" onclick="openModal(2,26,true)">＋ post</button></div><div class="cal-day" data-day="27"><div class="day-num">27</div><button class="add-post-btn" onclick="openModal(2,27,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="28"><div class="day-num">28</div><button class="add-post-btn" onclick="openModal(2,28,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="29"><div class="day-num">29</div><button class="add-post-btn" onclick="openModal(2,29,true)">＋ post</button></div><div class="cal-day" data-day="30"><div class="day-num">30</div><button class="add-post-btn" onclick="openModal(2,30,true)">＋ post</button></div><div class="cal-day" data-day="31"><div class="day-num">31</div><button class="add-post-btn" onclick="openModal(2,31,true)">＋ post</button></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div></div></div></div></div><div class="month-block" id="month-3"><div class="month-header"><div class="month-title">Abril <em>2026</em></div><div class="month-badge">Mês 4</div></div><div class="month-notes" contenteditable="true" data-month="4" placeholder="Descreva a campanha do mês, promoções, objetivos, datas importantes…">Thiago Assis Alfaiataria — 10 posts planejados</div><div class="plan-panel">
     <div class="plan-header-row">
       <span class="plan-icon">📋</span>
       <span>Planejamento do Mês</span>
@@ -376,29 +364,29 @@
     <div class="plan-grid">
       <div class="plan-cell">
         <div class="plan-label"><span>🎯</span> Objetivos de Campanha</div>
-        <textarea class="plan-input tall" placeholder="Ex: Aumentar leads, lançar promoção, gerar awareness…" onchange="savePlanField(4,'objetivos',this.value)">Aumentar alcance em Angra com novos alunos.</textarea>
+        <textarea class="plan-input tall" placeholder="Ex: Aumentar leads, lançar promoção, gerar awareness…" onchange="savePlanField(4,'objetivos',this.value)"></textarea>
       </div>
       <div class="plan-cell">
         <div class="plan-label"><span>💰</span> Investimento em Mídia</div>
-        <textarea class="plan-input tall" placeholder="Ex: R$ 1.000 — Meta Ads + Google Ads…" onchange="savePlanField(4,'investimento',this.value)">300 reais</textarea>
+        <textarea class="plan-input tall" placeholder="Ex: R$ 1.000 — Meta Ads + Google Ads…" onchange="savePlanField(4,'investimento',this.value)"></textarea>
       </div>
       <div class="plan-cell">
         <div class="plan-label"><span>💸</span> Tráfego Pago</div>
-        <textarea class="plan-input tall" placeholder="Ex: R$ 600 Meta Ads (feed + stories), R$ 400 Google. Públicos, segmentações…" onchange="savePlanField(4,'trafego',this.value)">300 reais em meta ads.</textarea>
+        <textarea class="plan-input tall" placeholder="Ex: R$ 600 Meta Ads (feed + stories), R$ 400 Google. Públicos, segmentações…" onchange="savePlanField(4,'trafego',this.value)"></textarea>
       </div>
       <div class="plan-cell">
         <div class="plan-label"><span>🌟</span> Influenciadores</div>
-        <textarea class="plan-input tall" placeholder="Ex: @perfil — tipo de conteúdo, formato, prazo…" onchange="savePlanField(4,'influenciadores',this.value)">Ana Laura.</textarea>
+        <textarea class="plan-input tall" placeholder="Ex: @perfil — tipo de conteúdo, formato, prazo…" onchange="savePlanField(4,'influenciadores',this.value)"></textarea>
       </div>
       <div class="plan-cell" style="border-right:none">
         <div class="plan-label"><span>👤</span> Persona do Mês</div>
-        <textarea class="plan-input tall" placeholder="Ex: Público-alvo, faixa etária, dores, plataformas que usa…" onchange="savePlanField(4,'persona',this.value)">Idosos, Mulheres 30+, Homens 25+.</textarea>
+        <textarea class="plan-input tall" placeholder="Ex: Público-alvo, faixa etária, dores, plataformas que usa…" onchange="savePlanField(4,'persona',this.value)"></textarea>
       </div>
     </div>
     <div class="plan-grid-bottom">
       <div class="plan-cell-full">
         <div class="plan-label"><span>📝</span> Observações Gerais</div>
-        <textarea class="plan-input" style="min-height:48px;resize:vertical" placeholder="Anotações livres, pendências, decisões, reuniões, contatos…" onchange="savePlanField(4,'observacoes',this.value)">Iniciar nova campanha focado em saúde e bem estar, fazer captação.</textarea>
+        <textarea class="plan-input" style="min-height:48px;resize:vertical" placeholder="Anotações livres, pendências, decisões, reuniões, contatos…" onchange="savePlanField(4,'observacoes',this.value)"></textarea>
       </div>
     </div>
   </div><div class="cal-grid-outer"><div class="cal-dow"><div class="cal-dow-cell wknd">Dom</div><div class="cal-dow-cell">Seg</div><div class="cal-dow-cell">Ter</div><div class="cal-dow-cell">Qua</div><div class="cal-dow-cell">Qui</div><div class="cal-dow-cell">Sex</div><div class="cal-dow-cell wknd">Sáb</div></div><div class="cal-weeks"><div class="cal-week"><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day" data-day="1"><div class="day-num">1</div><div class="special-label">🤥 Dia da Mentira</div>
@@ -410,118 +398,118 @@
               </div>
               <div class="post-type-tag">🎨 Arte</div>
               
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,1,this.innerText)">A gente finge que acredita — Dia da Mentira</div>
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,1,this.innerText)">Camisa sob medida</div>
               
               <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,1)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day" data-day="2"><div class="day-num">2</div><div class="special-label">🧩 Consciência do Autismo</div><button class="add-post-btn" onclick="openModal(3,2,true)">＋ post</button></div><div class="cal-day" data-day="3"><div class="day-num">3</div><div class="special-label">✝️ Sexta-Feira Santa</div><button class="add-post-btn" onclick="openModal(3,3,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="4"><div class="day-num">4</div><button class="add-post-btn" onclick="openModal(3,4,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="5"><div class="day-num">5</div><div class="special-label">🐣 Páscoa</div><button class="add-post-btn" onclick="openModal(3,5,true)">＋ post</button></div><div class="cal-day" data-day="6"><div class="day-num">6</div><div class="special-label">🙏 São Benedito</div>
-            <div class="post-card arte" onclick="openModal(3,6)">
+            </div></div><div class="cal-day" data-day="2"><div class="day-num">2</div><div class="special-label">🧩 Consciência do Autismo</div><button class="add-post-btn" onclick="openModal(3,2,true)">＋ post</button></div><div class="cal-day" data-day="3"><div class="day-num">3</div><div class="special-label">✝️ Sexta-Feira Santa</div>
+            <div class="post-card reels" onclick="openModal(3,3)">
               <div class="card-actions">
-                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,6)" title="Toggle postado">✅</button>
-                <button class="card-btn" onclick="event.stopPropagation();openModal(3,6)">✏️</button>
-                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,6)">🗑</button>
+                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,3)" title="Toggle postado">✅</button>
+                <button class="card-btn" onclick="event.stopPropagation();openModal(3,3)">✏️</button>
+                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,3)">🗑</button>
               </div>
-              <div class="post-type-tag">🎨 Arte</div>
+              <div class="post-type-tag">🎬 Reels</div>
               
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,6,this.innerText)">Checklist de Treino</div>
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,3,this.innerText)">T-Shirt sobre medida ✅ APROVADO</div>
               
-              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,6)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day" data-day="7"><div class="day-num">7</div><div class="special-label">🌍 Dia Mundial da Saúde</div>
-            <div class="post-card arte" onclick="openModal(3,7)">
+              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,3)" title="Adicionar foto">＋</button></div>
+            </div></div><div class="cal-day wknd-col" data-day="4"><div class="day-num">4</div><button class="add-post-btn" onclick="openModal(3,4,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="5"><div class="day-num">5</div><div class="special-label">🐣 Páscoa</div><button class="add-post-btn" onclick="openModal(3,5,true)">＋ post</button></div><div class="cal-day" data-day="6"><div class="day-num">6</div><div class="special-label">🙏 São Benedito</div><button class="add-post-btn" onclick="openModal(3,6,true)">＋ post</button></div><div class="cal-day" data-day="7"><div class="day-num">7</div><div class="special-label">🌍 Dia Mundial da Saúde</div>
+            <div class="post-card carrossel" onclick="openModal(3,7)">
               <div class="card-actions">
                 <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,7)" title="Toggle postado">✅</button>
                 <button class="card-btn" onclick="event.stopPropagation();openModal(3,7)">✏️</button>
                 <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,7)">🗑</button>
               </div>
-              <div class="post-type-tag">🎨 Arte</div>
+              <div class="post-type-tag">🖼 Carrossel</div>
               
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,7,this.innerText)">Dia Mundial da Saúde — NOVO</div>
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,7,this.innerText)">Tipos de colarinho</div>
               
               <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,7)" title="Adicionar foto">＋</button></div>
             </div></div><div class="cal-day" data-day="8"><div class="day-num">8</div><div class="special-label">🎗️ Combate ao Câncer</div><button class="add-post-btn" onclick="openModal(3,8,true)">＋ post</button></div><div class="cal-day" data-day="9"><div class="day-num">9</div>
-            <div class="post-card arte" onclick="openModal(3,9)">
+            <div class="post-card reels" onclick="openModal(3,9)">
               <div class="card-actions">
                 <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,9)" title="Toggle postado">✅</button>
                 <button class="card-btn" onclick="event.stopPropagation();openModal(3,9)">✏️</button>
                 <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,9)">🗑</button>
               </div>
-              <div class="post-type-tag">🎨 Arte</div>
+              <div class="post-type-tag">🎬 Reels</div>
               
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,9,this.innerText)">Lembre-se</div>
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,9,this.innerText)">Camisa Carnaval TBT ✅ APROVADO</div>
               
               <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,9)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day" data-day="10"><div class="day-num">10</div>
-            <div class="post-card reels" onclick="openModal(3,10)">
+            </div></div><div class="cal-day" data-day="10"><div class="day-num">10</div><button class="add-post-btn" onclick="openModal(3,10,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="11"><div class="day-num">11</div><button class="add-post-btn" onclick="openModal(3,11,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="12"><div class="day-num">12</div><button class="add-post-btn" onclick="openModal(3,12,true)">＋ post</button></div><div class="cal-day" data-day="13"><div class="day-num">13</div><div class="special-label">💋 Dia do Beijo</div><button class="add-post-btn" onclick="openModal(3,13,true)">＋ post</button></div><div class="cal-day" data-day="14"><div class="day-num">14</div><div class="special-label">☕ Dia Mundial do Café</div><button class="add-post-btn" onclick="openModal(3,14,true)">＋ post</button></div><div class="cal-day" data-day="15"><div class="day-num">15</div>
+            <div class="post-card arte" onclick="openModal(3,15)">
               <div class="card-actions">
-                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,10)" title="Toggle postado">✅</button>
-                <button class="card-btn" onclick="event.stopPropagation();openModal(3,10)">✏️</button>
-                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,10)">🗑</button>
-              </div>
-              <div class="post-type-tag">🎬 Reels</div>
-              
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,10,this.innerText)">Não é sobre estética — NOVO</div>
-              
-              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,10)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day wknd-col" data-day="11"><div class="day-num">11</div><button class="add-post-btn" onclick="openModal(3,11,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="12"><div class="day-num">12</div><button class="add-post-btn" onclick="openModal(3,12,true)">＋ post</button></div><div class="cal-day" data-day="13"><div class="day-num">13</div><div class="special-label">💋 Dia do Beijo</div>
-            <div class="post-card reels" onclick="openModal(3,13)">
-              <div class="card-actions">
-                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,13)" title="Toggle postado">✅</button>
-                <button class="card-btn" onclick="event.stopPropagation();openModal(3,13)">✏️</button>
-                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,13)">🗑</button>
-              </div>
-              <div class="post-type-tag">🎬 Reels</div>
-              
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,13,this.innerText)">Correção postural — NOVO</div>
-              
-              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,13)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day" data-day="14"><div class="day-num">14</div><div class="special-label">☕ Dia Mundial do Café</div>
-            <div class="post-card arte" onclick="openModal(3,14)">
-              <div class="card-actions">
-                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,14)" title="Toggle postado">✅</button>
-                <button class="card-btn" onclick="event.stopPropagation();openModal(3,14)">✏️</button>
-                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,14)">🗑</button>
+                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,15)" title="Toggle postado">✅</button>
+                <button class="card-btn" onclick="event.stopPropagation();openModal(3,15)">✏️</button>
+                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,15)">🗑</button>
               </div>
               <div class="post-type-tag">🎨 Arte</div>
               
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,14,this.innerText)">Mais difícil voltar</div>
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,15,this.innerText)">Escolha do tecido</div>
               
-              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,14)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day" data-day="15"><div class="day-num">15</div><button class="add-post-btn" onclick="openModal(3,15,true)">＋ post</button></div><div class="cal-day" data-day="16"><div class="day-num">16</div><button class="add-post-btn" onclick="openModal(3,16,true)">＋ post</button></div><div class="cal-day" data-day="17"><div class="day-num">17</div>
-            <div class="post-card carrossel" onclick="openModal(3,17)">
+              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,15)" title="Adicionar foto">＋</button></div>
+            </div></div><div class="cal-day" data-day="16"><div class="day-num">16</div><button class="add-post-btn" onclick="openModal(3,16,true)">＋ post</button></div><div class="cal-day" data-day="17"><div class="day-num">17</div>
+            <div class="post-card reels" onclick="openModal(3,17)">
               <div class="card-actions">
                 <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,17)" title="Toggle postado">✅</button>
                 <button class="card-btn" onclick="event.stopPropagation();openModal(3,17)">✏️</button>
                 <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,17)">🗑</button>
               </div>
-              <div class="post-type-tag">🖼 Carrossel</div>
+              <div class="post-type-tag">🎬 Reels</div>
               
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,17,this.innerText)">Seu corpo precisa de movimento</div>
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,17,this.innerText)">Iniciais na camisa ✅ APROVADO</div>
               
               <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,17)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day wknd-col" data-day="18"><div class="day-num">18</div><button class="add-post-btn" onclick="openModal(3,18,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="19"><div class="day-num">19</div><button class="add-post-btn" onclick="openModal(3,19,true)">＋ post</button></div><div class="cal-day" data-day="20"><div class="day-num">20</div><button class="add-post-btn" onclick="openModal(3,20,true)">＋ post</button></div><div class="cal-day" data-day="21"><div class="day-num">21</div><div class="special-label">🇧🇷 Tiradentes</div><button class="add-post-btn" onclick="openModal(3,21,true)">＋ post</button></div><div class="cal-day" data-day="22"><div class="day-num">22</div><div class="special-label">🌍 Dia da Terra</div>
-            <div class="post-card arte" onclick="openModal(3,22)">
+            </div></div><div class="cal-day wknd-col" data-day="18"><div class="day-num">18</div><button class="add-post-btn" onclick="openModal(3,18,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="19"><div class="day-num">19</div><button class="add-post-btn" onclick="openModal(3,19,true)">＋ post</button></div><div class="cal-day" data-day="20"><div class="day-num">20</div>
+            <div class="post-card carrossel" onclick="openModal(3,20)">
               <div class="card-actions">
-                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,22)" title="Toggle postado">✅</button>
-                <button class="card-btn" onclick="event.stopPropagation();openModal(3,22)">✏️</button>
-                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,22)">🗑</button>
+                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,20)" title="Toggle postado">✅</button>
+                <button class="card-btn" onclick="event.stopPropagation();openModal(3,20)">✏️</button>
+                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,20)">🗑</button>
+              </div>
+              <div class="post-type-tag">🖼 Carrossel</div>
+              
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,20,this.innerText)">Depoimentos de clientes</div>
+              
+              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,20)" title="Adicionar foto">＋</button></div>
+            </div></div><div class="cal-day" data-day="21"><div class="day-num">21</div><div class="special-label">🇧🇷 Tiradentes</div><button class="add-post-btn" onclick="openModal(3,21,true)">＋ post</button></div><div class="cal-day" data-day="22"><div class="day-num">22</div><div class="special-label">🌍 Dia da Terra</div><button class="add-post-btn" onclick="openModal(3,22,true)">＋ post</button></div><div class="cal-day" data-day="23"><div class="day-num">23</div><div class="special-label">⚔️ São Jorge</div>
+            <div class="post-card arte" onclick="openModal(3,23)">
+              <div class="card-actions">
+                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,23)" title="Toggle postado">✅</button>
+                <button class="card-btn" onclick="event.stopPropagation();openModal(3,23)">✏️</button>
+                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,23)">🗑</button>
               </div>
               <div class="post-type-tag">🎨 Arte</div>
               
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,22,this.innerText)">Funcional</div>
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,23,this.innerText)">Camisas para qualquer ocasião</div>
               
-              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,22)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day" data-day="23"><div class="day-num">23</div><div class="special-label">⚔️ São Jorge</div><button class="add-post-btn" onclick="openModal(3,23,true)">＋ post</button></div><div class="cal-day" data-day="24"><div class="day-num">24</div><div class="special-label">🥩 Dia Int. do Churrasco</div><button class="add-post-btn" onclick="openModal(3,24,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="25"><div class="day-num">25</div><button class="add-post-btn" onclick="openModal(3,25,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="26"><div class="day-num">26</div><button class="add-post-btn" onclick="openModal(3,26,true)">＋ post</button></div><div class="cal-day" data-day="27"><div class="day-num">27</div>
-            <div class="post-card carrossel" onclick="openModal(3,27)">
+              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,23)" title="Adicionar foto">＋</button></div>
+            </div></div><div class="cal-day" data-day="24"><div class="day-num">24</div><div class="special-label">🥩 Dia Int. do Churrasco</div><button class="add-post-btn" onclick="openModal(3,24,true)">＋ post</button></div><div class="cal-day wknd-col" data-day="25"><div class="day-num">25</div><button class="add-post-btn" onclick="openModal(3,25,true)">＋ post</button></div></div><div class="cal-week"><div class="cal-day wknd-col" data-day="26"><div class="day-num">26</div><button class="add-post-btn" onclick="openModal(3,26,true)">＋ post</button></div><div class="cal-day" data-day="27"><div class="day-num">27</div>
+            <div class="post-card reels" onclick="openModal(3,27)">
               <div class="card-actions">
                 <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,27)" title="Toggle postado">✅</button>
                 <button class="card-btn" onclick="event.stopPropagation();openModal(3,27)">✏️</button>
                 <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,27)">🗑</button>
               </div>
-              <div class="post-type-tag">🖼 Carrossel</div>
+              <div class="post-type-tag">🎬 Reels</div>
               
-              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,27,this.innerText)">Benefícios dos exercícios aeróbicos</div>
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,27,this.innerText)">Medidas ✅ APROVADO</div>
               
               <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,27)" title="Adicionar foto">＋</button></div>
-            </div></div><div class="cal-day" data-day="28"><div class="day-num">28</div><div class="special-label">👵 Dia da Sogra</div><button class="add-post-btn" onclick="openModal(3,28,true)">＋ post</button></div><div class="cal-day" data-day="29"><div class="day-num">29</div><button class="add-post-btn" onclick="openModal(3,29,true)">＋ post</button></div><div class="cal-day" data-day="30"><div class="day-num">30</div><div class="special-label">🎷 Dia Int. do Jazz</div><button class="add-post-btn" onclick="openModal(3,30,true)">＋ post</button></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div></div></div></div></div><div class="month-block" id="month-4"><div class="month-header"><div class="month-title">Maio <em>2026</em></div><div class="month-badge">Mês 5</div></div><div class="month-notes" contenteditable="true" data-month="5" placeholder="Descreva a campanha do mês, promoções, objetivos, datas importantes…"></div><div class="plan-panel">
+            </div></div><div class="cal-day" data-day="28"><div class="day-num">28</div><div class="special-label">👵 Dia da Sogra</div><button class="add-post-btn" onclick="openModal(3,28,true)">＋ post</button></div><div class="cal-day" data-day="29"><div class="day-num">29</div>
+            <div class="post-card arte" onclick="openModal(3,29)">
+              <div class="card-actions">
+                <button class="card-btn" onclick="event.stopPropagation();togglePostado(3,29)" title="Toggle postado">✅</button>
+                <button class="card-btn" onclick="event.stopPropagation();openModal(3,29)">✏️</button>
+                <button class="card-btn" onclick="event.stopPropagation();deletePostByKey(3,29)">🗑</button>
+              </div>
+              <div class="post-type-tag">🎨 Arte</div>
+              
+              <div class="post-title" contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="updateTitle(3,29,this.innerText)">Elegância e postura</div>
+              
+              <div class="card-gallery"><button class="add-thumb-btn" onclick="event.stopPropagation();triggerCardImg(3,29)" title="Adicionar foto">＋</button></div>
+            </div></div><div class="cal-day" data-day="30"><div class="day-num">30</div><div class="special-label">🎷 Dia Int. do Jazz</div><button class="add-post-btn" onclick="openModal(3,30,true)">＋ post</button></div><div class="cal-day empty"><div class="day-num"></div></div><div class="cal-day empty"><div class="day-num"></div></div></div></div></div></div><div class="month-block" id="month-4"><div class="month-header"><div class="month-title">Maio <em>2026</em></div><div class="month-badge">Mês 5</div></div><div class="month-notes" contenteditable="true" data-month="5" placeholder="Descreva a campanha do mês, promoções, objetivos, datas importantes…"></div><div class="plan-panel">
     <div class="plan-header-row">
       <span class="plan-icon">📋</span>
       <span>Planejamento do Mês</span>
@@ -791,14 +779,14 @@
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-header">
-      <h3>Editar Post · <span id="modalDateLabel">4/1/2026</span></h3>
+      <h3>Editar Post · <span id="modalDateLabel"></span></h3>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
         <label>Tipo de Conteúdo</label>
         <div class="type-grid">
-          <div class="type-opt selected" data-type="arte" onclick="selectType('arte')">🎨 Arte</div>
+          <div class="type-opt" data-type="arte" onclick="selectType('arte')">🎨 Arte</div>
           <div class="type-opt" data-type="foto" onclick="selectType('foto')">📸 Foto</div>
           <div class="type-opt" data-type="story" onclick="selectType('story')">📱 Story</div>
           <div class="type-opt" data-type="reels" onclick="selectType('reels')">🎬 Reels</div>
@@ -809,7 +797,7 @@
         <label>Título / Frase da Postagem</label>
         <input type="text" id="modalPostTitle" placeholder="Ex: Nem todo dia precisa ser correria">
       </div>
-      <div class="form-group" id="fieldImgObs" style="">
+      <div class="form-group" id="fieldImgObs" style="display:none">
         <label>Observações de Imagem / Vídeo</label>
         <textarea id="modalImgObs" placeholder="Descreva a imagem ideal, enquadramento, luz, referências…" style="min-height:120px"></textarea>
       </div>
@@ -826,13 +814,14 @@ Slide 2: …" style="min-height:160px"></textarea>
         <label>Nº de Slides</label>
         <input type="text" id="modalSlidesNum" placeholder="Ex: 7 slides">
       </div>
-      <div class="form-group" id="fieldCaption" style="">
+      <div class="form-group" id="fieldCaption">
         <label>Legenda completa</label>
         <textarea id="modalCaption" placeholder="Texto, hashtags, telefone…"></textarea>
       </div>
       <div class="form-group">
         <div class="mgal-label">Imagens / Fotos <span class="mgal-hint">— arraste ou clique em ＋</span></div>
-        <div class="modal-gallery" id="modalGallery" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleDrop(event)"><button class="mgal-add" type="button"><span style="font-size:22px">＋</span><span class="lbl">foto</span></button></div>
+        <div class="modal-gallery" id="modalGallery" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleDrop(event)">
+        </div>
       </div>
       <div class="form-group" id="fieldVideoLink" style="display:none">
         <label>🎬 Link do Vídeo</label>
@@ -906,7 +895,7 @@ Slide 2: …" style="min-height:160px"></textarea>
   </div>
 </div>
 
-<div class="toast show" id="toast">✅ Post salvo!</div>
+<div class="toast" id="toast"></div>
 
 <script>
 // ─────────────────────────────────────────────
@@ -920,7 +909,7 @@ const MONTHS_CONFIG = [
   { year:2026, month:1,  firstDow:4, days:31, notes:'', special:{1:'🎆 Ano Novo',6:'🏖️ Feriado RJ'} },
   { year:2026, month:2,  firstDow:0, days:28, notes:'', special:{16:'🎭 Carnaval',17:'🎭 Carnaval',18:'🎭 Quarta-feira de Cinzas'} },
   { year:2026, month:3,  firstDow:0, days:31, notes:'', special:{8:'👩 Dia da Mulher',20:'🌿 Início do Outono'} },
-  { year:2026, month:4,  firstDow:3, days:30, notes:'Academia ProAtivo — 10 posts planejados', special:{1:'🤥 Dia da Mentira',2:'🧩 Consciência do Autismo',3:'✝️ Sexta-Feira Santa',5:'🐣 Páscoa',6:'🙏 São Benedito',7:'🌍 Dia Mundial da Saúde',8:'🎗️ Combate ao Câncer',13:'💋 Dia do Beijo',14:'☕ Dia Mundial do Café',21:'🇧🇷 Tiradentes',22:'🌍 Dia da Terra',23:'⚔️ São Jorge',24:'🥩 Dia Int. do Churrasco',28:'👵 Dia da Sogra',30:'🎷 Dia Int. do Jazz'} },
+  { year:2026, month:4,  firstDow:3, days:30, notes:'Thiago Assis Alfaiataria — 10 posts planejados', special:{1:'🤥 Dia da Mentira',2:'🧩 Consciência do Autismo',3:'✝️ Sexta-Feira Santa',5:'🐣 Páscoa',6:'🙏 São Benedito',7:'🌍 Dia Mundial da Saúde',8:'🎗️ Combate ao Câncer',13:'💋 Dia do Beijo',14:'☕ Dia Mundial do Café',21:'🇧🇷 Tiradentes',22:'🌍 Dia da Terra',23:'⚔️ São Jorge',24:'🥩 Dia Int. do Churrasco',28:'👵 Dia da Sogra',30:'🎷 Dia Int. do Jazz'} },
   { year:2026, month:5,  firstDow:5, days:31, notes:'', special:{10:'💐 Dia das Mães',31:'🟡 Fim Maio Amarelo'} },
   { year:2026, month:6,  firstDow:1, days:30, notes:'', special:{5:'🌍 Meio Ambiente',12:'💑 Dia dos Namorados'} },
   { year:2026, month:7,  firstDow:3, days:31, notes:'', special:{} },
@@ -932,13 +921,13 @@ const MONTHS_CONFIG = [
 ];
 
 // Pre-filled posts per month [{ month, day, type, title, pending, trafego, perfil }]
-let POSTS = [{"month":4,"day":1,"type":"arte","title":"A gente finge que acredita — Dia da Mentira","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/6ffEqwu9T","slides":"","slidesNum":"","roteiro":"","descricao":"Post temático de 1º de abril, usando frases clássicas que todo mundo fala na academia mas quase nunca cumpre.","imgObs":"Formato: Post feed. Estilo: humor com situações comuns de academia. Tom: descontraído, engraçado e motivacional. Mensagem final: Pare de prometer… comece hoje.\n\nTexto da arte:\nFrases espalhadas ao redor da pessoa:\n\"Vou malhar todos os dias da semana.\"\n\"Hoje eu vou treinar pesado.\"\n\"Depois do treino eu não vou comer besteira.\"\n\"Segunda-feira eu começo a dieta de verdade.\"\n\"O cardio eu faço amanhã.\"\n\nA GENTE FINGE QUE ACREDITA…\n🟥 1º DE ABRIL – DIA DA MENTIRA\nPROATIVO ACADEMIA","caption":"Hoje é Dia da Mentira, mas a gente já conhece algumas clássicas da academia… 😅\n\n\"Segunda eu começo.\"\n\"Hoje eu treino pesado.\"\n\"Depois do treino não vou comer besteira.\"\n\"O cardio eu faço amanhã.\"\n\nSe identificou? 👀\n\nEntão aproveita o dia de hoje para mudar a história e começar de verdade.\n\nA Academia ProAtivo está pronta para te ajudar nessa missão! 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":6,"type":"arte","title":"Checklist de Treino","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/7J64318Sa","slides":"","slidesNum":"","roteiro":"","descricao":"Post estilo checklist motivacional, incentivando as pessoas a ligarem hábitos positivos e desligarem a preguiça.","imgObs":"Formato: Post feed. Estilo: fundo escuro de academia, atleta treinando, elementos em laranja ou vermelho. Tom: motivacional, direto e energético. Mensagem central: Resultados vêm de hábitos diários.\n\nTexto da arte:\nCHECKLIST DE TREINO!\n🟧 ON — HIDRATAÇÃO\n🟧 ON — ALIMENTAÇÃO\n🟧 ON — DISCIPLINA\n⬜ OFF — PREGUIÇA\n\nCHEGA DE DESCULPAS!\nFaça diferente: uma nova versão de você te espera.\nPROATIVO ACADEMIA","caption":"Checklist do treino ativado? 💪🔥\n\n✔️ Hidratação\n✔️ Alimentação\n✔️ Disciplina\n❌ Preguiça\n\nNão existe transformação sem constância.\nCada treino é um passo mais perto da sua melhor versão.\n\nA decisão começa hoje.\nE a Academia ProAtivo está aqui para te acompanhar nessa evolução.\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":7,"type":"arte","title":"Dia Mundial da Saúde — NOVO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","roteiro":"","descricao":"Post comemorativo do Dia Mundial da Saúde, conectando a data com o propósito da academia. Posicionar a ProAtivo como espaço de saúde e qualidade de vida — não apenas estética. Oportunidade de reforçar os diferenciais: turmas reduzidas, acompanhamento próximo.","imgObs":"Formato: Post feed. Estilo: fundo claro ou elementos de bem-estar (verde, azul), tipografia limpa, logo em evidência. Tom: positivo, acolhedor e informativo. Mensagem central: Exercício é pilar de saúde. A academia é espaço de cuidado.\n\nTexto da arte:\n7 DE ABRIL\nDIA MUNDIAL DA SAÚDE\n\nSaúde não começa no consultório.\nComeça no movimento.\n\nACADEMIA PROATIVO","caption":"Hoje é o Dia Mundial da Saúde. 🌍\n\nE saúde não é só ausência de doença.\nÉ disposição. É movimento. É escolher cuidar de si todos os dias.\n\nA atividade física é um dos caminhos mais acessíveis para uma vida mais saudável.\nE na Academia ProAtivo, cada treino é pensado para você evoluir com acompanhamento e atenção.\n\nTurmas reduzidas para máxima atenção.\nPorque aqui, você não é só mais um.\n\nCuide da sua saúde. Comece a se mover. 💪\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":9,"type":"arte","title":"Lembre-se","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/1VaJLAcrO","slides":"","slidesNum":"","roteiro":"","descricao":"Post simples e impactante no estilo \"lembrete diário\", incentivando as pessoas a cuidarem do corpo.","imgObs":"Formato: Post feed. Estilo: fundo escuro de academia, kettlebells ou pesos ao redor, tipografia forte com destaque para LEMBRETE. Tom: motivacional, positivo e inspirador. Mensagem central: Treinar é um ato de cuidado com você mesmo.\n\nTexto da arte:\nLEMBRETE\n🔔 Lembre-se\nSeu corpo precisa de movimento\ne você merece esse cuidado.\nACADEMIA PROATIVO","caption":"🔔 Lembrete do dia:\n\nSeu corpo precisa de movimento.\nE você merece esse cuidado.\n\nTreinar é mais do que estética — é saúde, disposição e qualidade de vida.\n\nDê o primeiro passo hoje.\nA Academia ProAtivo está pronta para caminhar com você nessa jornada. 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":10,"type":"reels","title":"Não é sobre estética — NOVO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","descricao":"Reels motivacional quebrando o mito de que academia é só aparência. Foco em saúde, disposição e bem-estar. Formato rápido, fácil de produzir com celular.","imgObs":"Formato: Reels. Estilo: cortes rápidos, texto sobreposto, vídeos do dia a dia da academia. Tom: inspirador, leve e humano. Objetivo: gerar identificação, compartilhamentos e atrair público que não se vê como \"pessoa de academia\".","roteiro":"Texto 1 (tela): \"Você acha que academia é só sobre estética?\"\nCena: pessoa se olhando no espelho da academia.\n\nTexto 2 (tela): \"É sobre dormir melhor.\"\nCena: aluno treinando com foco.\n\nTexto 3 (tela): \"Ter mais energia no dia a dia.\"\nCena: exercício dinâmico / funcional.\n\nTexto 4 (tela): \"Cuidar da sua saúde mental.\"\nCena: aluno sorrindo / cumprimentando colegas.\n\nTexto 5 (tela): \"Não é sobre estética. É sobre viver melhor.\"\nCena: logo ProAtivo + endereço.\n\nMúsica sugerida: trilha motivacional com batida crescente.\nDuração estimada: 15–20 segundos.","caption":"Não é sobre estética.\n\nÉ sobre dormir melhor.\nTer mais energia.\nCuidar da mente.\nViver com mais disposição.\n\nNa Academia ProAtivo, a gente treina para viver melhor. Simples assim.\n\nVem conhecer. 💪\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":13,"type":"reels","title":"Correção postural — NOVO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","descricao":"Reels educativo sobre a importância do treino para correção e manutenção da postura. Conteúdo \"salvável\" — dicas práticas de saúde geram alto salvamento.","imgObs":"Formato: Reels. Estilo: demonstração com professor, antes/depois, celular. Tom: informativo, acessível e prático. Objetivo: posicionar a ProAtivo como academia de saúde integral, gerar salvamentos e compartilhamentos.","roteiro":"Texto 1 (tela): \"Você passa o dia todo assim?\"\nCena: pessoa sentada com postura incorreta (encenação).\n\nTexto 2 (tela): \"Sua coluna sente.\"\nCena: transição rápida.\n\nTexto 3 (tela): \"O treino certo corrige isso.\"\nCena: aluno fazendo exercício de fortalecimento postural (remada, prancha, etc.).\n\nTexto 4 (tela): \"Fortalecimento + alongamento = postura correta.\"\nCena: demonstração com orientação do professor.\n\nTexto 5 (tela): \"Cuide da sua postura na ProAtivo.\"\nCena: logo + endereço.\n\nMúsica sugerida: trilha leve, transições rápidas.\nDuração estimada: 15–25 segundos.","caption":"Sua postura no dia a dia diz muito sobre a sua saúde.\n\nHoras sentado, cabeça pra frente, ombros travados...\nO corpo cobra.\n\nO treino de fortalecimento muscular é um dos melhores caminhos para corrigir e prevenir problemas posturais.\n\nNa ProAtivo, você treina com acompanhamento de perto.\nTurmas reduzidas. Atenção de verdade.\n\nCuide da sua postura. Cuide de você. 💪\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":14,"type":"arte","title":"Mais difícil voltar","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/26cebnTlu","slides":"","slidesNum":"","roteiro":"","descricao":"Post motivacional e de conscientização, mostrando que quanto mais tempo a pessoa fica sem treinar, mais difícil é retomar.","imgObs":"Formato: Post feed. Estilo: pessoa correndo, caminhando ou treinando, fundo escuro ou urbano, tipografia forte destacando \"mais difícil voltar\". Tom: motivacional, direto e inspirador. Mensagem central: Quanto mais tempo parado, mais difícil fica — comece hoje.\n\nTexto da arte:\nQuanto mais tempo parado,\nmais difícil voltar.\nPROATIVO ACADEMIA","caption":"Quanto mais tempo parado, mais difícil voltar.\n\nA rotina muda, a motivação diminui e o primeiro passo parece cada vez mais distante.\n\nMas a verdade é simples: o melhor momento para recomeçar é agora.\n\nNa Academia ProAtivo, cada treino é um passo rumo à sua melhor versão. 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":17,"type":"carrossel","title":"Seu corpo precisa de movimento","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/6OXR9jQye","slides":"Slide 1: LEMBRETE — Seu corpo precisa de MOVIMENTO\nSlide 2: Ficar parado só torna mais difícil voltar\nSlide 3: Treinar é cuidar da sua saúde\nSlide 4: Não espere motivação. Crie disciplina.\nSlide 5: Comece hoje. Seu futuro agradece.\nSlide 6 (final): ACADEMIA PROATIVO — Treine. Evolua. Supere seus limites. 📍 Rua Raúl Pompéia (esquina com Rua da Conceição)","slidesNum":"6","roteiro":"","descricao":"Carrossel motivacional e direto, com frases curtas para manter o usuário passando os slides.","imgObs":"Formato: Carrossel (6 slides). Estilo: fundo de academia, elementos fitness, cores fortes (preto + amarelo / branco). Tom: motivacional, simples e direto.","caption":"Às vezes tudo que a gente precisa é de um lembrete.\n\nSeu corpo foi feito para se mover.\nE cada treino é um passo para uma versão melhor de você.\n\nNão espere o momento perfeito.\nComece hoje.\n\nA Academia ProAtivo está pronta para te acompanhar nessa evolução. 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com Rua da Conceição)"},{"month":4,"day":22,"type":"arte","title":"Funcional","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/2GITH4T87","slides":"","slidesNum":"","roteiro":"","descricao":"Post para apresentar ou incentivar a participação nas aulas de funcional. Despertar curiosidade e incentivar os alunos.","imgObs":"Formato: Post feed. Estilo: alunos treinando juntos, exercícios dinâmicos (corda, agachamento, peso), destaque na palavra FUNCIONAL. Tom: motivacional e convidativo. Mensagem central: Treinar em grupo motiva mais e traz ótimos resultados.\n\nTexto da arte:\nVOCÊ JÁ PARTICIPOU DE UMA AULA DE FUNCIONAL?\n🔥 Mais energia\n🔥 Mais resistência\n🔥 Mais resultado\nPROATIVO ACADEMIA","caption":"Você já experimentou uma aula de funcional? 💪🔥\n\nEsse tipo de treino é dinâmico, intenso e trabalha força, resistência, equilíbrio e condicionamento físico ao mesmo tempo.\n\nAlém disso, treinar em grupo traz mais motivação e energia para cada treino.\n\nVem viver essa experiência na Academia ProAtivo!\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":27,"type":"carrossel","title":"Benefícios dos exercícios aeróbicos","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/5nLsRQpbz","slides":"Slide 1 (capa): 3 BENEFÍCIOS DOS EXERCÍCIOS AERÓBICOS — Academia ProAtivo\nSlide 2: 🔥 Queima de gordura — Os exercícios aeróbicos ajudam a acelerar o metabolismo.\nSlide 3: ❤️ Melhora da saúde do coração — Fortalece o sistema cardiovascular e melhora a circulação.\nSlide 4: ⚡ Mais energia no dia a dia — Ajuda a reduzir o estresse e aumenta a disposição.\nSlide 5 (final): Movimente-se. Seu corpo agradece. ACADEMIA PROATIVO 📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)","slidesNum":"5","roteiro":"","descricao":"Carrossel educativo e motivacional explicando benefícios do exercício aeróbico.","imgObs":"Formato: Carrossel (5 slides). Estilo: pessoas correndo, pedalando, esteira ou bike ergométrica, números grandes, cores fortes e esportivas. Tom: informativo, motivacional e simples.","caption":"Você inclui exercícios aeróbicos na sua rotina de treino? 👀\n\nEles são fundamentais para melhorar a saúde, aumentar a disposição e ajudar na queima de gordura.\n\nCorrer, pedalar ou caminhar são ótimas formas de manter o corpo em movimento.\n\nNa Academia ProAtivo, você encontra estrutura e acompanhamento para evoluir todos os dias. 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"}];
+let POSTS = [{"month":4,"day":1,"type":"arte","title":"Camisa sob medida","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","roteiro":"","descricao":"Apresentar o carro-chefe da alfaiataria: a camisa sob medida. Foco no ajuste, acabamento e elegância da peça.","imgObs":"Formato: Foto no feed\nEstilo: Minimalista e elegante\nImagem: Camisa personalizada em cabide ou sobre mesa de alfaiataria. Fundo neutro. Fita métrica e ferramentas de costura compondo o cenário. Destaque para o tecido e o acabamento.\n\nTexto da arte:\nCamisa sob medida.\nElegância que começa no ajuste.","caption":"Vestir bem começa pelo ajuste.\n\nUma camisa sob medida respeita suas proporções,\nseu estilo e sua rotina.\n\nCada detalhe é pensado\npra criar uma peça que funcione no seu corpo.\n\nMais conforto.\nMelhor caimento.\nElegância em qualquer ocasião.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":3,"type":"reels","title":"T-Shirt sobre medida ✅ APROVADO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","descricao":"Mostrar que alfaiataria não é só camisa social. A T-Shirt Tec sob medida é a resposta pra quem quer conforto com ajuste perfeito — ideal pro calor do Rio.","imgObs":"Formato: Reels\nEstilo: Dinâmico, mostrando a peça no corpo","roteiro":"Abrir com \"Alfaiataria não é só camisa social.\" Mostrar a T-Shirt Tec sendo vestida ou já no corpo. Destaque pro caimento, tecido leve e ajuste. Fechar com assinatura.","caption":"Quem disse que alfaiataria é só camisa social?\n\nA T-Shirt Tec sob medida foi pensada\npros dias mais quentes do Rio.\n\nTecido leve, respirável,\nque não absorve suor e não forma bolinhas.\n\nCasual no estilo.\nSob medida no ajuste.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":7,"type":"carrossel","title":"Tipos de colarinho","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"Slide 1 (capa): Escolha o colarinho ideal para sua camisa\nSlide 2: Colarinho clássico\nSlide 3: Colarinho italiano\nSlide 4: Colarinho curto\nSlide 5: Colarinho americano\nSlide 6: Cada colarinho transmite um estilo diferente. Na alfaiataria, você escolhe cada detalhe.","slidesNum":"6","roteiro":"","descricao":"Carrossel educativo mostrando os diferentes tipos de colarinho. Objetivo: mostrar o nível de personalização e educar o público sobre detalhes que fazem diferença.","imgObs":"Formato: Carrossel (6 slides)\nEstilo: Clean, elegante, fundo neutro\nCada slide com foto ou ilustração do tipo de colarinho + nome\nSlide final com chamada para alfaiataria","caption":"Um detalhe pequeno muda tudo numa camisa.\n\nO colarinho influencia no estilo,\nna formalidade e até na forma como a peça\nse encaixa com gravata ou num look mais solto.\n\nClássico, italiano, curto, americano…\nCada um conta uma história diferente.\n\nNa alfaiataria sob medida,\nessa escolha é sua.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":9,"type":"reels","title":"Camisa Carnaval TBT ✅ APROVADO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","descricao":"TBT mostrando camisas feitas sob medida pro carnaval. Conecta alfaiataria com momentos de celebração e reforça a versatilidade — não é só corporativo.","imgObs":"Formato: Reels\nEstilo: Descontraído, energia de TBT","roteiro":"Montagem com fotos ou vídeos de camisas produzidas para o carnaval (estampas, cores vibrantes, clientes usando). Trilha animada. Texto em tela: \"Carnaval também é sob medida.\" Fechar com assinatura.","caption":"Carnaval passou, mas o estilo ficou. 🎭\n\nEssas camisas foram feitas sob medida\npra quem quis curtir a folia\ncom personalidade e caimento perfeito.\n\nPorque alfaiataria não é só terno e gravata.\nÉ sobre vestir bem em qualquer momento.\n\nAté no bloco. 😏\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":15,"type":"arte","title":"Escolha do tecido","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","roteiro":"","descricao":"Mostrar que o processo começa antes da costura — na escolha do tecido. Valoriza o processo artesanal e a participação do cliente.","imgObs":"Formato: Foto no feed\nEstilo: Artesanal, texturas em destaque\nImagem: Variedade de tecidos dobrados ou abertos sobre mesa. Fita métrica, giz de alfaiate ou tesoura compondo a cena. Foco nas texturas e cores.\n\nTexto da arte:\nTudo começa pela escolha do tecido.","caption":"Toda camisa começa antes da costura.\n\nTextura, gramatura, composição…\nCada tecido tem uma proposta diferente\ne muda completamente o resultado final.\n\nAqui, o cliente participa desse processo.\nEscolhe o que combina com seu estilo,\ncom sua rotina e com o conforto que busca.\n\nEsse é o primeiro passo de uma peça sob medida.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":17,"type":"reels","title":"Iniciais na camisa ✅ APROVADO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","descricao":"Destacar o monograma como diferencial. Um detalhe discreto que transforma a camisa em peça única e exclusiva.","imgObs":"Formato: Reels\nEstilo: Close-up, foco no detalhe","roteiro":"Câmera abrindo no detalhe do monograma bordado. Zoom out revelando a peça completa. Texto em tela: \"O detalhe que faz a camisa ser só sua.\"","caption":"Tem um detalhe que nenhuma camisa pronta oferece.\n\nO monograma com as iniciais do cliente\ntransforma a peça em algo exclusivo.\n\nDiscreto.\nElegante.\nSó seu.\n\nUm pequeno bordado que diz muito\nsobre quem veste.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":20,"type":"carrossel","title":"Depoimentos de clientes","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"Slide 1 (capa): O que nossos clientes dizem\nSlide 2: \"O caimento ficou perfeito.\"\nSlide 3: \"É a primeira camisa que realmente se ajusta ao meu corpo.\"\nSlide 4: \"O conforto é totalmente diferente.\"\nSlide 5: \"Depois da primeira, não consegui mais usar camisa pronta.\"\nSlide 6: Esse é o resultado da alfaiataria sob medida.","slidesNum":"6","roteiro":"","descricao":"Prova social. Mostrar o que clientes reais dizem sobre a experiência de vestir sob medida pela primeira vez.","imgObs":"Formato: Carrossel (6 slides)\nEstilo: Elegante, minimalista, fundo escuro ou neutro\nPode incluir fotos de clientes usando as peças ou fotos das camisas","caption":"A gente pode falar muito sobre alfaiataria.\n\nMas nada convence mais\ndo que a reação de quem veste\na primeira camisa sob medida.\n\nO ajuste muda.\nO conforto muda.\nE a forma como você se enxerga também.\n\nDepois da primeira, fica difícil voltar.\nQuem já vestiu, sabe.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":23,"type":"arte","title":"Camisas para qualquer ocasião","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","roteiro":"","descricao":"Mostrar a versatilidade das camisas sob medida — funcionam no trabalho, em eventos e no dia a dia.","imgObs":"Formato: Foto no feed\nEstilo: Sofisticado, organizado\nImagem: Diferentes camisas organizadas lado a lado (cores variadas). Transmitir variedade e sofisticação. Pode ser em cabides ou dispostas sobre superfície elegante.\n\nTexto da arte:\nCamisas que vestem bem em qualquer ocasião.","caption":"Trabalho.\nEvento.\nDia a dia.\n\nUma boa camisa precisa funcionar\nem todos esses momentos.\n\nE quando ela é feita sob medida,\no ajuste acompanha você em qualquer situação.\n\nNão é só sobre roupa.\nÉ sobre confiança no que você veste.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":27,"type":"reels","title":"Medidas ✅ APROVADO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","descricao":"Mostrar o processo de tirar medidas — o momento mais importante da alfaiataria. Reforça o caráter artesanal e personalizado.","imgObs":"Formato: Reels\nEstilo: Bastidores, processo real","roteiro":"Thiago tirando medidas de um cliente no ateliê. Fita métrica, anotações, atenção ao detalhe. Trilha elegante. Texto em tela: \"Cada centímetro conta.\" Pode intercalar com a camisa pronta no final.","caption":"Antes da costura, vem o momento mais importante.\n\nA medição.\n\nCada centímetro é registrado.\nOmbro, peito, cintura, comprimento de manga…\nNada é aproximado.\n\nÉ nesse processo que a camisa\ncomeça a ganhar forma\nantes mesmo do primeiro corte.\n\nAlfaiataria é precisão.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"},{"month":4,"day":29,"type":"arte","title":"Elegância e postura","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","roteiro":"","descricao":"Post conceitual e aspiracional. Não é sobre a roupa em si, mas sobre o estilo de vida que a alfaiataria representa.","imgObs":"Formato: Foto no feed\nEstilo: Conceitual, sofisticado\nImagem: Homem bem vestido com terno, segurando taça de champanhe, relógio aparente. Ambiente elegante (bar, evento, ambiente refinado). Iluminação dramática ou noturna. Foco na postura, no terno e no lifestyle.\n\nTexto da arte:\nElegância também é postura.","caption":"Algumas peças fazem mais do que vestir.\n\nElas acompanham momentos importantes.\nEncontros, celebrações, ocasiões que pedem presença.\n\nUm terno bem ajustado transmite confiança\nantes mesmo de qualquer palavra.\n\nQuando o caimento está certo,\na postura muda junto.\n\nThiago Assis Alfaiataria.\n\n📍 Rua da Quitanda, 30 — sala 708/712 — Centro, RJ\n📲 (21) 98228-0245"}];
 
 // Ensure imgs array on every post
 POSTS = POSTS.map(p => ({...p, imgs: p.imgs||[], caption:p.caption||'', descricao:p.descricao||'', imgObs:p.imgObs||'', roteiro:p.roteiro||'', videoLink:p.videoLink||'', slides:p.slides||'', slidesNum:p.slidesNum||'', postado:p.postado||false}));
 
 // ── Planning data per month (saved separately) ──
-let PLAN_DATA = {"1":{},"2":{},"3":{},"4":{"objetivos":"Aumentar alcance em Angra com novos alunos.","investimento":"300 reais","trafego":"300 reais em meta ads.","influenciadores":"Ana Laura.","persona":"Idosos, Mulheres 30+, Homens 25+.","observacoes":"Iniciar nova campanha focado em saúde e bem estar, fazer captação."},"5":{},"6":{},"7":{},"8":{},"9":{},"10":{},"11":{},"12":{}};
+let PLAN_DATA = {"1":{},"2":{},"3":{},"4":{"objetivos":"Inicio de postagens para melhorar conteúdo do perfil","investimento":"1.000 em google ads e meta ads","trafego":"500 Meta ads, 500 google Ads","influenciadores":"nenhum.","persona":"Empresários do Rio","observacoes":"Possível reunião no dia 25 de março."},"5":{},"6":{},"7":{},"8":{},"9":{},"10":{},"11":{},"12":{}};
 
 function getPlan(m){ return PLAN_DATA[m] || (PLAN_DATA[m]={}); }
 function savePlanField(m, field, val){ getPlan(m)[field] = val; }
@@ -970,17 +959,6 @@ function updateStats(){
 // ── Build Month Nav ──
 function buildMonthNav(){
   const nav=document.getElementById('monthNav');
-  if(!nav) return;
-  const existing = nav.querySelectorAll('.month-btn');
-  if(existing.length===MONTHS_CONFIG.length){
-    existing.forEach((btn,i)=>{
-      btn.onclick=()=>scrollToMonth(i);
-      btn.id='mnav'+i;
-      btn.textContent=MONTH_NAMES[MONTHS_CONFIG[i].month-1].substring(0,3);
-    });
-    return;
-  }
-  nav.innerHTML='';
   MONTHS_CONFIG.forEach((mc,i)=>{
     const btn=document.createElement('button');
     btn.className='month-btn';
@@ -1369,160 +1347,190 @@ function saveDatas(){
 document.getElementById('datasMonthSel').addEventListener('change', renderDatasList);
 document.getElementById('datasOverlay').addEventListener('click', e=>{if(e.target===e.currentTarget)closeDatasModal();});
 
-// ── Export / GitHub Persistência ──
-const GITHUB_CONFIG = {
-  owner: "DigiThree-Planejamentos",
-  repo: "calendario-proativo",
-  path: "index.html",
-  branch: "main"
-};
+// ── Export ──
+function exportHTML(){
+  const client = (document.getElementById('hdrClient')?.innerText || '').trim();
+  const year = (document.getElementById('hdrYear')?.innerText || '').trim();
+  const sub = (document.getElementById('hdrSub')?.innerText || '').trim();
 
-function getGithubToken(forceReset=false){
-  if(forceReset){
-    localStorage.removeItem('github_token');
-    localStorage.removeItem('github_repo_config');
-  }
-  let token = localStorage.getItem('github_token');
-  if(!token){
-    token = prompt('Cole seu token do GitHub com permissão de escrita no repositório:');
-    if(!token) throw new Error('Token não informado.');
-    localStorage.setItem('github_token', token.trim());
-  }
-  return token.trim();
-}
-
-function resetGithubToken(){
-  localStorage.removeItem('github_token');
-  localStorage.removeItem('github_repo_config');
-  showToast('🔐 Token limpo. Ele será pedido novamente ao salvar.');
-}
-
-function collectCalendarState(){
-  const header = {
-    client: (document.getElementById('hdrClient')?.innerText || '').trim(),
-    year: (document.getElementById('hdrYear')?.innerText || '').trim(),
-    sub: (document.getElementById('hdrSub')?.innerText || '').trim()
-  };
-
-  document.querySelectorAll('.month-notes[data-month]').forEach(el=>{
-    const month = parseInt(el.dataset.month,10);
-    const idx = MONTHS_CONFIG.findIndex(m=>m.month===month);
-    if(idx>=0) MONTHS_CONFIG[idx].notes = el.innerHTML;
-  });
-
-  document.querySelectorAll('.month-block').forEach(block=>{
-    const id = block.id || '';
-    const mIdx = parseInt(id.replace('month-',''),10);
-    if(Number.isNaN(mIdx) || !MONTHS_CONFIG[mIdx]) return;
-    const textareas = block.querySelectorAll('.plan-panel textarea');
-    const keys = ['objetivos','investimento','trafego','influenciadores','persona','observacoes'];
-    const plan = getPlan(MONTHS_CONFIG[mIdx].month);
-    textareas.forEach((ta,idx)=>{
-      const key = keys[idx];
-      if(key) plan[key] = ta.value;
-    });
-  });
-
-  return {
-    header,
-    monthsConfig: JSON.parse(JSON.stringify(MONTHS_CONFIG)),
-    posts: JSON.parse(JSON.stringify(POSTS)),
-    planData: JSON.parse(JSON.stringify(PLAN_DATA))
-  };
-}
-
-function applyCalendarState(state){
-  if(!state || typeof state !== 'object') return;
-
-  if(state.header){
-    if(document.getElementById('hdrClient')) document.getElementById('hdrClient').innerText = state.header.client || '';
-    if(document.getElementById('hdrYear')) document.getElementById('hdrYear').innerText = state.header.year || '';
-    if(document.getElementById('hdrSub')) document.getElementById('hdrSub').innerText = state.header.sub || '';
-  }
-
-  if(Array.isArray(state.monthsConfig)){
-    MONTHS_CONFIG.splice(0, MONTHS_CONFIG.length, ...state.monthsConfig);
-  }
-
-  if(Array.isArray(state.posts)){
-    POSTS.splice(0, POSTS.length, ...state.posts);
-  }
-
-  if(state.planData && typeof state.planData === 'object'){
-    Object.keys(PLAN_DATA).forEach(k=>delete PLAN_DATA[k]);
-    Object.assign(PLAN_DATA, state.planData);
-  }
-}
-
-function buildPersistentHtml(state){
   let src = document.documentElement.outerHTML;
-  src = src.replace(/
-<script id="persisted-state">
-window.__PERSISTED_CALENDAR_STATE__ = {"header":{"client":"Academia ProAtivo","year":"2026","sub":"CALENDÁRIO EDITORIAL 2026"},"monthsConfig":[{"year":2026,"month":1,"firstDow":4,"days":31,"notes":"","special":{"1":"🎆 Ano Novo","6":"🏖️ Feriado RJ"}},{"year":2026,"month":2,"firstDow":0,"days":28,"notes":"","special":{"16":"🎭 Carnaval","17":"🎭 Carnaval","18":"🎭 Quarta-feira de Cinzas"}},{"year":2026,"month":3,"firstDow":0,"days":31,"notes":"","special":{"8":"👩 Dia da Mulher","20":"🌿 Início do Outono"}},{"year":2026,"month":4,"firstDow":3,"days":30,"notes":"Academia ProAtivo — 10 posts planejados","special":{"1":"🤥 Dia da Mentira","2":"🧩 Consciência do Autismo","3":"✝️ Sexta-Feira Santa","5":"🐣 Páscoa","6":"🙏 São Benedito","7":"🌍 Dia Mundial da Saúde","8":"🎗️ Combate ao Câncer","13":"💋 Dia do Beijo","14":"☕ Dia Mundial do Café","21":"🇧🇷 Tiradentes","22":"🌍 Dia da Terra","23":"⚔️ São Jorge","24":"🥩 Dia Int. do Churrasco","28":"👵 Dia da Sogra","30":"🎷 Dia Int. do Jazz"}},{"year":2026,"month":5,"firstDow":5,"days":31,"notes":"","special":{"10":"💐 Dia das Mães","31":"🟡 Fim Maio Amarelo"}},{"year":2026,"month":6,"firstDow":1,"days":30,"notes":"","special":{"5":"🌍 Meio Ambiente","12":"💑 Dia dos Namorados"}},{"year":2026,"month":7,"firstDow":3,"days":31,"notes":"","special":{}},{"year":2026,"month":8,"firstDow":6,"days":31,"notes":"","special":{"9":"👨 Dia dos Pais"}},{"year":2026,"month":9,"firstDow":2,"days":30,"notes":"","special":{"7":"🇧🇷 Independência","15":"🛍️ Dia do Cliente","22":"🌸 Primavera"}},{"year":2026,"month":10,"firstDow":4,"days":31,"notes":"","special":{"2":"👶 Dia das Crianças","12":"🇧🇷 N.Sra. Aparecida","31":"🎃 Halloween"}},{"year":2026,"month":11,"firstDow":0,"days":30,"notes":"","special":{"2":"✝️ Finados","15":"🇧🇷 Proclamação Rep.","20":"⚫ Black Friday"}},{"year":2026,"month":12,"firstDow":2,"days":31,"notes":"","special":{"8":"🎄 Imaculada Conceição","25":"🎄 Natal","31":"🥂 Réveillon"}}],"posts":[{"month":4,"day":1,"type":"arte","title":"A gente finge que acredita — Dia da Mentira","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/6ffEqwu9T","slides":"","slidesNum":"","roteiro":"","descricao":"Post temático de 1º de abril, usando frases clássicas que todo mundo fala na academia mas quase nunca cumpre.","imgObs":"Formato: Post feed. Estilo: humor com situações comuns de academia. Tom: descontraído, engraçado e motivacional. Mensagem final: Pare de prometer… comece hoje.\n\nTexto da arte:\nFrases espalhadas ao redor da pessoa:\n\"Vou malhar todos os dias da semana.\"\n\"Hoje eu vou treinar pesado.\"\n\"Depois do treino eu não vou comer besteira.\"\n\"Segunda-feira eu começo a dieta de verdade.\"\n\"O cardio eu faço amanhã.\"\n\nA GENTE FINGE QUE ACREDITA…\n🟥 1º DE ABRIL – DIA DA MENTIRA\nPROATIVO ACADEMIA","caption":"Hoje é Dia da Mentira, mas a gente já conhece algumas clássicas da academia… 😅\n\n\"Segunda eu começo.\"\n\"Hoje eu treino pesado.\"\n\"Depois do treino não vou comer besteira.\"\n\"O cardio eu faço amanhã.\"\n\nSe identificou? 👀\n\nEntão aproveita o dia de hoje para mudar a história e começar de verdade.\n\nA Academia ProAtivo está pronta para te ajudar nessa missão! 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":6,"type":"arte","title":"Checklist de Treino","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/7J64318Sa","slides":"","slidesNum":"","roteiro":"","descricao":"Post estilo checklist motivacional, incentivando as pessoas a ligarem hábitos positivos e desligarem a preguiça.","imgObs":"Formato: Post feed. Estilo: fundo escuro de academia, atleta treinando, elementos em laranja ou vermelho. Tom: motivacional, direto e energético. Mensagem central: Resultados vêm de hábitos diários.\n\nTexto da arte:\nCHECKLIST DE TREINO!\n🟧 ON — HIDRATAÇÃO\n🟧 ON — ALIMENTAÇÃO\n🟧 ON — DISCIPLINA\n⬜ OFF — PREGUIÇA\n\nCHEGA DE DESCULPAS!\nFaça diferente: uma nova versão de você te espera.\nPROATIVO ACADEMIA","caption":"Checklist do treino ativado? 💪🔥\n\n✔️ Hidratação\n✔️ Alimentação\n✔️ Disciplina\n❌ Preguiça\n\nNão existe transformação sem constância.\nCada treino é um passo mais perto da sua melhor versão.\n\nA decisão começa hoje.\nE a Academia ProAtivo está aqui para te acompanhar nessa evolução.\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":7,"type":"arte","title":"Dia Mundial da Saúde — NOVO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","roteiro":"","descricao":"Post comemorativo do Dia Mundial da Saúde, conectando a data com o propósito da academia. Posicionar a ProAtivo como espaço de saúde e qualidade de vida — não apenas estética. Oportunidade de reforçar os diferenciais: turmas reduzidas, acompanhamento próximo.","imgObs":"Formato: Post feed. Estilo: fundo claro ou elementos de bem-estar (verde, azul), tipografia limpa, logo em evidência. Tom: positivo, acolhedor e informativo. Mensagem central: Exercício é pilar de saúde. A academia é espaço de cuidado.\n\nTexto da arte:\n7 DE ABRIL\nDIA MUNDIAL DA SAÚDE\n\nSaúde não começa no consultório.\nComeça no movimento.\n\nACADEMIA PROATIVO","caption":"Hoje é o Dia Mundial da Saúde. 🌍\n\nE saúde não é só ausência de doença.\nÉ disposição. É movimento. É escolher cuidar de si todos os dias.\n\nA atividade física é um dos caminhos mais acessíveis para uma vida mais saudável.\nE na Academia ProAtivo, cada treino é pensado para você evoluir com acompanhamento e atenção.\n\nTurmas reduzidas para máxima atenção.\nPorque aqui, você não é só mais um.\n\nCuide da sua saúde. Comece a se mover. 💪\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":9,"type":"arte","title":"Lembre-se","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/1VaJLAcrO","slides":"","slidesNum":"","roteiro":"","descricao":"Post simples e impactante no estilo \"lembrete diário\", incentivando as pessoas a cuidarem do corpo.","imgObs":"Formato: Post feed. Estilo: fundo escuro de academia, kettlebells ou pesos ao redor, tipografia forte com destaque para LEMBRETE. Tom: motivacional, positivo e inspirador. Mensagem central: Treinar é um ato de cuidado com você mesmo.\n\nTexto da arte:\nLEMBRETE\n🔔 Lembre-se\nSeu corpo precisa de movimento\ne você merece esse cuidado.\nACADEMIA PROATIVO","caption":"🔔 Lembrete do dia:\n\nSeu corpo precisa de movimento.\nE você merece esse cuidado.\n\nTreinar é mais do que estética — é saúde, disposição e qualidade de vida.\n\nDê o primeiro passo hoje.\nA Academia ProAtivo está pronta para caminhar com você nessa jornada. 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":10,"type":"reels","title":"Não é sobre estética — NOVO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","descricao":"Reels motivacional quebrando o mito de que academia é só aparência. Foco em saúde, disposição e bem-estar. Formato rápido, fácil de produzir com celular.","imgObs":"Formato: Reels. Estilo: cortes rápidos, texto sobreposto, vídeos do dia a dia da academia. Tom: inspirador, leve e humano. Objetivo: gerar identificação, compartilhamentos e atrair público que não se vê como \"pessoa de academia\".","roteiro":"Texto 1 (tela): \"Você acha que academia é só sobre estética?\"\nCena: pessoa se olhando no espelho da academia.\n\nTexto 2 (tela): \"É sobre dormir melhor.\"\nCena: aluno treinando com foco.\n\nTexto 3 (tela): \"Ter mais energia no dia a dia.\"\nCena: exercício dinâmico / funcional.\n\nTexto 4 (tela): \"Cuidar da sua saúde mental.\"\nCena: aluno sorrindo / cumprimentando colegas.\n\nTexto 5 (tela): \"Não é sobre estética. É sobre viver melhor.\"\nCena: logo ProAtivo + endereço.\n\nMúsica sugerida: trilha motivacional com batida crescente.\nDuração estimada: 15–20 segundos.","caption":"Não é sobre estética.\n\nÉ sobre dormir melhor.\nTer mais energia.\nCuidar da mente.\nViver com mais disposição.\n\nNa Academia ProAtivo, a gente treina para viver melhor. Simples assim.\n\nVem conhecer. 💪\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":13,"type":"reels","title":"Correção postural — NOVO","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"","slides":"","slidesNum":"","descricao":"Reels educativo sobre a importância do treino para correção e manutenção da postura. Conteúdo \"salvável\" — dicas práticas de saúde geram alto salvamento.","imgObs":"Formato: Reels. Estilo: demonstração com professor, antes/depois, celular. Tom: informativo, acessível e prático. Objetivo: posicionar a ProAtivo como academia de saúde integral, gerar salvamentos e compartilhamentos.","roteiro":"Texto 1 (tela): \"Você passa o dia todo assim?\"\nCena: pessoa sentada com postura incorreta (encenação).\n\nTexto 2 (tela): \"Sua coluna sente.\"\nCena: transição rápida.\n\nTexto 3 (tela): \"O treino certo corrige isso.\"\nCena: aluno fazendo exercício de fortalecimento postural (remada, prancha, etc.).\n\nTexto 4 (tela): \"Fortalecimento + alongamento = postura correta.\"\nCena: demonstração com orientação do professor.\n\nTexto 5 (tela): \"Cuide da sua postura na ProAtivo.\"\nCena: logo + endereço.\n\nMúsica sugerida: trilha leve, transições rápidas.\nDuração estimada: 15–25 segundos.","caption":"Sua postura no dia a dia diz muito sobre a sua saúde.\n\nHoras sentado, cabeça pra frente, ombros travados...\nO corpo cobra.\n\nO treino de fortalecimento muscular é um dos melhores caminhos para corrigir e prevenir problemas posturais.\n\nNa ProAtivo, você treina com acompanhamento de perto.\nTurmas reduzidas. Atenção de verdade.\n\nCuide da sua postura. Cuide de você. 💪\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":14,"type":"arte","title":"Mais difícil voltar","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/26cebnTlu","slides":"","slidesNum":"","roteiro":"","descricao":"Post motivacional e de conscientização, mostrando que quanto mais tempo a pessoa fica sem treinar, mais difícil é retomar.","imgObs":"Formato: Post feed. Estilo: pessoa correndo, caminhando ou treinando, fundo escuro ou urbano, tipografia forte destacando \"mais difícil voltar\". Tom: motivacional, direto e inspirador. Mensagem central: Quanto mais tempo parado, mais difícil fica — comece hoje.\n\nTexto da arte:\nQuanto mais tempo parado,\nmais difícil voltar.\nPROATIVO ACADEMIA","caption":"Quanto mais tempo parado, mais difícil voltar.\n\nA rotina muda, a motivação diminui e o primeiro passo parece cada vez mais distante.\n\nMas a verdade é simples: o melhor momento para recomeçar é agora.\n\nNa Academia ProAtivo, cada treino é um passo rumo à sua melhor versão. 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":17,"type":"carrossel","title":"Seu corpo precisa de movimento","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/6OXR9jQye","slides":"Slide 1: LEMBRETE — Seu corpo precisa de MOVIMENTO\nSlide 2: Ficar parado só torna mais difícil voltar\nSlide 3: Treinar é cuidar da sua saúde\nSlide 4: Não espere motivação. Crie disciplina.\nSlide 5: Comece hoje. Seu futuro agradece.\nSlide 6 (final): ACADEMIA PROATIVO — Treine. Evolua. Supere seus limites. 📍 Rua Raúl Pompéia (esquina com Rua da Conceição)","slidesNum":"6","roteiro":"","descricao":"Carrossel motivacional e direto, com frases curtas para manter o usuário passando os slides.","imgObs":"Formato: Carrossel (6 slides). Estilo: fundo de academia, elementos fitness, cores fortes (preto + amarelo / branco). Tom: motivacional, simples e direto.","caption":"Às vezes tudo que a gente precisa é de um lembrete.\n\nSeu corpo foi feito para se mover.\nE cada treino é um passo para uma versão melhor de você.\n\nNão espere o momento perfeito.\nComece hoje.\n\nA Academia ProAtivo está pronta para te acompanhar nessa evolução. 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com Rua da Conceição)"},{"month":4,"day":22,"type":"arte","title":"Funcional","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/2GITH4T87","slides":"","slidesNum":"","roteiro":"","descricao":"Post para apresentar ou incentivar a participação nas aulas de funcional. Despertar curiosidade e incentivar os alunos.","imgObs":"Formato: Post feed. Estilo: alunos treinando juntos, exercícios dinâmicos (corda, agachamento, peso), destaque na palavra FUNCIONAL. Tom: motivacional e convidativo. Mensagem central: Treinar em grupo motiva mais e traz ótimos resultados.\n\nTexto da arte:\nVOCÊ JÁ PARTICIPOU DE UMA AULA DE FUNCIONAL?\n🔥 Mais energia\n🔥 Mais resistência\n🔥 Mais resultado\nPROATIVO ACADEMIA","caption":"Você já experimentou uma aula de funcional? 💪🔥\n\nEsse tipo de treino é dinâmico, intenso e trabalha força, resistência, equilíbrio e condicionamento físico ao mesmo tempo.\n\nAlém disso, treinar em grupo traz mais motivação e energia para cada treino.\n\nVem viver essa experiência na Academia ProAtivo!\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":4,"day":27,"type":"carrossel","title":"Benefícios dos exercícios aeróbicos","pending":false,"trafego":false,"postado":false,"imgs":[],"videoLink":"https://pin.it/5nLsRQpbz","slides":"Slide 1 (capa): 3 BENEFÍCIOS DOS EXERCÍCIOS AERÓBICOS — Academia ProAtivo\nSlide 2: 🔥 Queima de gordura — Os exercícios aeróbicos ajudam a acelerar o metabolismo.\nSlide 3: ❤️ Melhora da saúde do coração — Fortalece o sistema cardiovascular e melhora a circulação.\nSlide 4: ⚡ Mais energia no dia a dia — Ajuda a reduzir o estresse e aumenta a disposição.\nSlide 5 (final): Movimente-se. Seu corpo agradece. ACADEMIA PROATIVO 📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)","slidesNum":"5","roteiro":"","descricao":"Carrossel educativo e motivacional explicando benefícios do exercício aeróbico.","imgObs":"Formato: Carrossel (5 slides). Estilo: pessoas correndo, pedalando, esteira ou bike ergométrica, números grandes, cores fortes e esportivas. Tom: informativo, motivacional e simples.","caption":"Você inclui exercícios aeróbicos na sua rotina de treino? 👀\n\nEles são fundamentais para melhorar a saúde, aumentar a disposição e ajudar na queima de gordura.\n\nCorrer, pedalar ou caminhar são ótimas formas de manter o corpo em movimento.\n\nNa Academia ProAtivo, você encontra estrutura e acompanhamento para evoluir todos os dias. 💪🔥\n\n📍 Rua Raúl Pompéia (esquina com a Rua da Conceição)"},{"month":1,"day":4,"type":"arte","title":"teste","caption":"","imgObs":"","roteiro":"","videoLink":"","slides":"","slidesNum":"","pending":false,"postado":false,"trafego":false,"imgs":[]}],"planData":{"1":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"2":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"3":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"4":{"objetivos":"Aumentar alcance em Angra com novos alunos.","investimento":"300 reais","trafego":"300 reais em meta ads.","influenciadores":"Ana Laura.","persona":"Idosos, Mulheres 30+, Homens 25+.","observacoes":"Iniciar nova campanha focado em saúde e bem estar, fazer captação."},"5":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"6":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"7":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"8":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"9":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"10":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"11":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""},"12":{"objetivos":"","investimento":"","trafego":"","influenciadores":"","persona":"","observacoes":""}}};
-</script>
 
-<script>
-const GITHUB_USER = "DigiThree-Planejamentos";
-const REPO = "calendario-te-levo-mobile";
-const FILE_PATH = "index.html";
+  src = src.replace(/(<span contenteditable="true" id="hdrClient"[^>]*>)([\s\S]*?)(<\/span>)/, `$1${client}$3`);
+  src = src.replace(/(<em contenteditable="true" id="hdrYear"[^>]*>)([\s\S]*?)(<\/em>)/, `$1${year}$3`);
+  src = src.replace(/(<span[^>]*id="hdrSub"[^>]*>)([\s\S]*?)(<\/span>)/, `$1${sub}$3`);
 
-// TOKEN
-function getGithubToken(){
-  let token = localStorage.getItem("github_token");
-  if(!token){
-    token = prompt("Cole seu token do GitHub:");
-    if(token) localStorage.setItem("github_token", token);
-  }
-  return token;
+  const blob = new Blob([src], { type: 'text/html;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `calendario-editorial-${client.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'editavel'}-${year || '2026'}.html`;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    URL.revokeObjectURL(a.href);
+    a.remove();
+  }, 100);
 }
 
-function resetGithubToken(){
-  const token = prompt("Cole seu token do GitHub:");
-  if(token){
-    localStorage.setItem("github_token", token);
-    alert("Token salvo 🔐");
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+
+
+
+/* ============================= */
+/* SUPABASE + PERSISTÊNCIA SITE */
+/* ============================= */
+
+const SUPABASE_URL = 'https://aprneolltdkizvfakuus.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_tmWBQV8mZnk7FBvq1iZ3pA_lprGokcu';
+
+const supabaseClient = window.supabase && typeof window.supabase.createClient === 'function'
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
+
+const CALENDAR_ID = "thiago-assis-alfaiataria-abril-2026";
+const CALENDAR_NAME = "Thiago Assis Alfaiataria";
+
+function getSiteData(){
+  return {
+    html: document.getElementById('monthsContainer')?.innerHTML || '',
+    plan: typeof PLAN_DATA !== 'undefined' ? PLAN_DATA : {},
+    posts: typeof POSTS !== 'undefined' ? POSTS : [],
+    header: {
+      client: document.getElementById('hdrClient')?.innerText || '',
+      year: document.getElementById('hdrYear')?.innerText || '',
+      sub: document.getElementById('hdrSub')?.innerText || ''
+    }
+  };
+}
+
+function applySiteData(data){
+
+  if(data.posts && typeof POSTS !== 'undefined'){
+    POSTS = data.posts;
+  }
+
+  if(data.plan && typeof PLAN_DATA !== 'undefined'){
+    PLAN_DATA = data.plan;
+  }
+
+  if(data.header){
+    if(document.getElementById('hdrClient')){
+      document.getElementById('hdrClient').innerText = data.header.client || '';
+    }
+    if(document.getElementById('hdrYear')){
+      document.getElementById('hdrYear').innerText = data.header.year || '';
+    }
+    if(document.getElementById('hdrSub')){
+      document.getElementById('hdrSub').innerText = data.header.sub || '';
+    }
+  }
+
+  if(typeof renderAll === 'function'){
+    renderAll();
+  }
+
+  if(data.html){
+    const el = document.getElementById('monthsContainer');
+    if(el) el.innerHTML = data.html;
+  }
+
+  if(typeof updateStats === 'function'){
+    updateStats();
   }
 }
 
-// SALVAR HTML NO GITHUB (SEM QUEBRAR O SISTEMA)
-async function salvarAlteracoes(){
-  const token = getGithubToken();
-  if(!token) return;
+function saveLocalBackup(data){
+  localStorage.setItem(CALENDAR_ID, JSON.stringify(data));
+}
 
-  const htmlContent = document.documentElement.outerHTML;
+function loadLocalBackup(){
+  const raw = localStorage.getItem(CALENDAR_ID);
+  if(!raw) return null;
+  try { return JSON.parse(raw); } catch { return null; }
+}
 
-  const api = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/${FILE_PATH}`;
+async function saveSiteData(){
 
-  let sha = null;
+  const payload = getSiteData();
 
-  const getRes = await fetch(api, {
-    headers: { Authorization: `token ${token}` }
+  saveLocalBackup(payload);
+
+  if(!supabaseClient){
+    alert('Salvo só no navegador');
+    return;
+  }
+
+  try{
+    const { error } = await supabaseClient
+      .from('calendarios')
+      .upsert({
+        id: CALENDAR_ID,
+        nome: CALENDAR_NAME,
+        dados: payload
+      }, { onConflict: 'id' });
+
+    if(error){
+      console.error(error);
+      alert('Erro ao salvar no site');
+      return;
+    }
+
+    alert('Salvo no site!');
+  }catch(e){
+    console.error(e);
+    alert('Erro ao salvar no site');
+  }
+}
+
+async function loadSiteData(){
+
+  if(supabaseClient){
+    try{
+      const { data } = await supabaseClient
+        .from('calendarios')
+        .select('dados')
+        .eq('id', CALENDAR_ID)
+        .maybeSingle();
+
+      if(data?.dados){
+        applySiteData(data.dados);
+        return;
+      }
+    }catch(e){
+      console.warn(e);
+    }
+  }
+
+  const local = loadLocalBackup();
+  if(local){
+    applySiteData(local);
+  }
+}
+
+// ── Init ──
+buildMonthNav();
+renderAll();
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadSiteData();
+});
+
+// Intersection observer to highlight active month in nav
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      const idx=parseInt(id.replace('month-',''));
+      document.querySelectorAll('.month-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+    }
   });
+},{threshold:0.15});
+document.querySelectorAll('.month-block').forEach(el=>observer.observe(el));
+</script><input type="file" accept="image/*" multiple="" style="display: none;">
 
-  if(getRes.ok){
-    const data = await getRes.json();
-    sha = data.sha;
-  }
-
-  const putRes = await fetch(api,{
-    method:"PUT",
-    headers:{
-      Authorization:`token ${token}`,
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-      message:"update via site",
-      content:btoa(unescape(encodeURIComponent(htmlContent))),
-      sha: sha || undefined
-    })
-  });
-
-  if(putRes.ok){
-    alert("Salvo no GitHub 🚀");
-  }else{
-    alert("Erro ao salvar ❌");
-  }
-}
-</script>
 
 </body></html>
